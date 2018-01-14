@@ -1,8 +1,10 @@
-function Lister($input) {
+function Lister($input, url) {
   this.$input = $input;
+  this.url = url;
 
   this.$listUI = null;
   this.selectedIndex = null;
+  this.valueChanged = debounce(this.valueChanged.bind(this), 300);
   this.wrapInput();
   this.createUI();
   this.bindEvents();
@@ -75,12 +77,12 @@ Lister.prototype = {
           this.$input.val(this.$selected.text());
           this.$input.blur();
           this.reset();
-        } else {
-          this.fetchMatches("", null, function(matches) {
-            this.reset();
-            this.matches = matches;
-            this.draw();
-          }.bind(this))
+        // } else {
+        //   this.reset();
+        //   this.fetchMatches("", null, function(matches) {
+        //     this.matches = matches;
+        //     this.draw();
+        //   }.bind(this))
         }
         break;
       case 'Escape':
@@ -90,9 +92,23 @@ Lister.prototype = {
     }
   },
 
+  gainFocus: function(e) {
+    e.preventDefault();
+    this.reset();
+    this.fetchMatches("", null, function(matches) {
+      this.matches = matches;
+      this.draw();
+    }.bind(this))
+  },
+
+  loseFocus: function(e) {
+    e.preventDefault();
+    setTimeout(this.reset.bind(this), 300);
+  },
+
   fetchMatches: function(query, limit, callback) {
     $.ajax({
-      url: "/categories.json",
+      url: this.url,
       type: "GET",
       data: {
         query: query,
@@ -149,13 +165,25 @@ Lister.prototype = {
   bindEvents: function() {
     this.$input.on('input', this.valueChanged.bind(this));
     this.$input.on('keydown', this.keydown.bind(this));
+    this.$input.on('focus', this.gainFocus.bind(this));
+    this.$input.on('focusout', this.loseFocus.bind(this));
     this.$listUI.on('click', 'li', this.clickMatch.bind(this));
   }
 }
 
 $(function() {
-  var $input = $('input').eq(0);
-  var autoSearch = new Lister($input);
+  var $categoryInputs = $('input[name*="category-"]');
+  $categoryInputs.each(function(index, input) {
+    new Lister($(input), "/categories.json");
+  });
+  // var $skillInputs = $('input[name*="skill-"]');
+  // $skillInputs.each(function(index, input) {
+  //   new Lister($(input), "/skills.json");
+  // });
+  // var $descriptionInputs = $('input[name*="description-"]');
+  // $descriptionInputs.each(function(index, input) {
+  //   new Lister($(input), "/descriptions.json");
+  // });
 });
 
 function wrapNumber(number, end) {

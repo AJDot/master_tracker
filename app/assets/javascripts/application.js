@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery3
+//= require debounce.js
 //= require master.js
 //= require rails-ujs
 //= require turbolinks

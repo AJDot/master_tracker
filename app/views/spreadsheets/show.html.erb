@@ -8,28 +8,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Software Development</td>
-        <td>Ruby</td>
-        <td>Mastery Tracker</td>
-      </tr>
-      <tr>
-        <td>Software Development</td>
-        <td>JavaScript</td>
-        <td>Photography Site</td>
-      </tr>
-      <tr>
-        <td>Software Development</td>
-        <td>HTML & CSS</td>
-        <td>All</td>
-      </tr>
-      <tr>
-        <td>
-          <input type="text" name="category-4" value="">
-        </td>
-        <td>HTML & CSS</td>
-        <td>All</td>
-      </tr>
+      <% 10.times do |row| %>
+        <%= render 'row', index: row %>
+      <% end %>
     </tbody>
   </table>
 </div>
