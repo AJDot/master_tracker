@@ -176,14 +176,14 @@ $(function() {
   $categoryInputs.each(function(index, input) {
     new Lister($(input), "/categories.json");
   });
-  // var $skillInputs = $('input[name*="skill-"]');
-  // $skillInputs.each(function(index, input) {
-  //   new Lister($(input), "/skills.json");
-  // });
-  // var $descriptionInputs = $('input[name*="description-"]');
-  // $descriptionInputs.each(function(index, input) {
-  //   new Lister($(input), "/descriptions.json");
-  // });
+  var $skillInputs = $('input[name*="skill-"]');
+  $skillInputs.each(function(index, input) {
+    new Lister($(input), "/skills.json");
+  });
+  var $descriptionInputs = $('input[name*="description-"]');
+  $descriptionInputs.each(function(index, input) {
+    new Lister($(input), "/descriptions.json");
+  });
 });
 
 function wrapNumber(number, end) {

@@ -3,4 +3,6 @@ Rails.application.routes.draw do
 
   get '/', to: "spreadsheets#show", as: 'home'
   resources :categories, only: [:index]
+  resources :skills, only: [:index]
+  resources :descriptions, only: [:index]
 end
