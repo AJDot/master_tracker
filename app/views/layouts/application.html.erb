@@ -9,10 +9,11 @@
   </head>
 
   <body>
-    <header>
-      <h1>Mastery Tracker</h1>
-      <hr />
-    </header>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <%= render 'layouts/navigation' %>
+      </div>
+    </div>
     <main>
       <%= yield %>
     </main>

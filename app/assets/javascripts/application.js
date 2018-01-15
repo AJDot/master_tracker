@@ -12,6 +12,7 @@
 //
 //= require jquery3
 //= require debounce.js
+//= require dropdown.js
 //= require master.js
 //= require rails-ujs
 //= require turbolinks

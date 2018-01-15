@@ -1,7 +1,30 @@
+/* COLORS */
+/*
+  GREEN
+  2D882D
+
+  BLUE
+  #226666
+
+  ORANGE
+  AA6C39
+
+  RED
+  AA3939;
+
+ */
+/* END COLORS */
+
 body {
   font: normal 16px Helvetica, Arial, sans-serif;
   padding: 0;
   margin: 0;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: #226666;
 }
 
 ul {
@@ -9,6 +32,44 @@ ul {
   padding: 0;
   margin: 0;
 }
+
+li {
+  line-height: 20px;
+}
+
+
+
+/*
+**************************************************
+NAVIGATION
+**************************************************
+*/
+
+a.brand {
+  font-size: 1.3em;
+  padding: 10px 15px;
+  margin: 0;
+}
+
+.navbar-inner {
+  min-height: 40px;
+  padding: 0 20px;
+  background: #E2FBFB;
+}
+
+.nav_item {
+  display: inline-block;
+  padding: 0 20px;
+  vertical-align: middle;
+}
+
+
+
+/*
+**************************************************
+SPEADSHEET
+**************************************************
+*/
 
 #picker tbody td {
   width: 200px;
@@ -58,10 +119,102 @@ AUTOCOMPLETE UI
 
 .autocomplete-ui-choice {
   padding: 4px 10px;
+  cursor: pointer;
 }
 
 .autocomplete-ui-choice.selected,
 .autocomplete-ui-choice:hover {
   color: #ffffff;
   background: #444444;
+}
+
+/*
+**************************************************
+BUTTONS
+**************************************************
+*/
+
+.btn {
+  display: inline-block;
+  padding: 4px 10px;
+  line-height: 20px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  color: #444444;
+  background: #eeeeee;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+.btn-group {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Link to open menu */
+.btn-group .btn:first-child {
+
+}
+
+.caret {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: top;
+  border-top: 4px solid #000000;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+.btn .caret {
+  margin-top: 8px;
+}
+
+.btn-group > .dropdown-toggle {
+  border-radius: 4px;
+}
+
+.btn-group > .dropdown-menu {
+  display: none;
+  font-size: 14px;
+}
+
+.open > .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu {
+  float: left;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  min-width: 160px;
+  /* padding: 5px 0; */
+  margin: 3px 0 0;
+  list-style: none;
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.dropdown-menu > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 20px;
+  color: #444444;
+  white-space: nowrap;
+}
+
+.dropdown-menu > li > a:hover {
+  color: #ffffff;
+  background: #226666;
 }
