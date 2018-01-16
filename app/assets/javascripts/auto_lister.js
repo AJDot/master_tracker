@@ -1,4 +1,4 @@
-function Lister($input, url) {
+App.AutoLister = function($input, url) {
   this.$input = $input;
   this.url = url;
 
@@ -9,10 +9,10 @@ function Lister($input, url) {
   this.createUI();
   this.bindEvents();
   this.reset();
-}
+};
 
-Lister.prototype = {
-  constructor: Lister,
+App.AutoLister.prototype = {
+  constructor: App.AutoLister,
 
   wrapInput: function() {
     var $wrapper = $('<div class="input-wrapper"></div>');
@@ -169,28 +169,21 @@ Lister.prototype = {
     this.$input.on('focusout', this.loseFocus.bind(this));
     this.$listUI.on('click', 'li', this.clickMatch.bind(this));
   }
-}
+};
 
-$(function() {
+$(document).on("turbolinks:load", function() {
   var $categoryInputs = $('input[name*="category-"]');
   $categoryInputs.each(function(index, input) {
-    new Lister($(input), "/categories.json");
+    new App.AutoLister($(input), "/categories.json");
   });
+
   var $skillInputs = $('input[name*="skill-"]');
   $skillInputs.each(function(index, input) {
-    new Lister($(input), "/skills.json");
+    new App.AutoLister($(input), "/skills.json");
   });
+
   var $descriptionInputs = $('input[name*="description-"]');
   $descriptionInputs.each(function(index, input) {
-    new Lister($(input), "/descriptions.json");
+    new App.AutoLister($(input), "/descriptions.json");
   });
 });
-
-function wrapNumber(number, end) {
-  // 0 to end (exclusive)
-  var number;
-  number = number % end;
-
-  if (number < 0) { number = end + number; }
-  return number;
-}

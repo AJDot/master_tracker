@@ -11,9 +11,11 @@
 // about supported directives.
 //
 //= require jquery3
-//= require debounce.js
-//= require dropdown.js
-//= require master.js
 //= require rails-ujs
 //= require turbolinks
-//= require_tree .
+//= require init
+//= require helpers.js
+//= require debounce.js
+//= require alert.js
+//= require dropdown.js
+//= require auto_lister.js
