@@ -1,0 +1,11 @@
+<h3>Create New Description</h3>
+
+<%= form_for @description do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Create Description', class: 'btn' %>
+  </div>
+<% end %>

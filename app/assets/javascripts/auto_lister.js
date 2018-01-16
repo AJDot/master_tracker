@@ -85,6 +85,11 @@ App.AutoLister.prototype = {
         //   }.bind(this))
         }
         break;
+      case 'Tab':
+        if (this.$selected) {
+          this.$input.val(this.$selected.text());
+        }
+        break;
       case 'Escape':
         e.preventDefault();
         this.$input.blur();

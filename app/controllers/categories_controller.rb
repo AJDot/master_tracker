@@ -14,6 +14,7 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
+    # Assign correct user after authentication
     @category.user = User.first
 
     if @category.save

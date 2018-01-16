@@ -1,0 +1,11 @@
+<h3>Create New Skill</h3>
+
+<%= form_for @skill do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Create Skill', class: 'btn' %>
+  </div>
+<% end %>
