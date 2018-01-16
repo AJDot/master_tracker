@@ -1,17 +1,31 @@
 /* COLORS */
 /*
   GREEN
-  2D882D
+  #2d882d;
 
   BLUE
-  #226666
+  #226666;
 
   ORANGE
-  AA6C39
+  #aa6c39;
 
   RED
-  AA3939;
+  #aa3939;
 
+  BRIGHT GREEN
+  #e4fde4;
+
+  BRIGHT BLUE
+  #e2fbfb;
+
+  BRIGHT ORANGE
+  #fff1e6;
+
+  BRIGHT RED
+  #ffe6e6;
+
+  MID GRAY
+  #8b8f84;
  */
 /* END COLORS */
 
@@ -37,7 +51,9 @@ li {
   line-height: 20px;
 }
 
-
+main {
+  padding: 20px;
+}
 
 /*
 **************************************************
@@ -54,12 +70,13 @@ a.brand {
 .navbar-inner {
   min-height: 40px;
   padding: 0 20px;
-  background: #E2FBFB;
+  background: #e2fbfb;
 }
 
 .nav_item {
   display: inline-block;
-  padding: 0 20px;
+  padding: 0;
+  margin-right: 20px;
   vertical-align: middle;
 }
 
@@ -104,7 +121,7 @@ AUTOCOMPLETE UI
 .autocomplete-ui {
   position: absolute;
   width: 100%;
-  max-height: 5em;
+  max-height: 10em;
   padding: 0;
   margin: 5px 0 0 0;
   color: #444444;
@@ -217,4 +234,104 @@ BUTTONS
 .dropdown-menu > li > a:hover {
   color: #ffffff;
   background: #226666;
+}
+
+/*
+*************************************************
+FLASH MESSAGES
+*************************************************
+*/
+
+.alert {
+  padding: 10px;
+  margin-bottom: 20px;
+  color: #7d6713;
+  background: #fff4cc;
+  border-radius: 4px;
+}
+
+.alert-success {
+  color: #444444;
+  background: #e4fde4;
+}
+
+.alert-danger {
+  color: #444444;
+  background: #ffe6e6;
+}
+
+.close {
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+/*
+*************************************************
+MESSAGES
+*************************************************
+*/
+
+.field_with_errors {
+  display: inline-block;
+}
+
+.field_with_errors input {
+
+}
+
+/*
+*************************************************
+FORMS
+*************************************************
+*/
+
+.form-group {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #cccccc;
+}
+
+label {
+  display: block;
+  margin: 10px 0 5px;
+  vertical-align: middle;
+}
+
+input,
+textarea,
+select {
+  padding: 6px 10px;
+  vertical-align: middle;
+  outline: none;
+  border: 1px solid #cccccc;
+  transition: border .2s linear, box-shadow .2s linear;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border: 1px solid #8b8f84;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(139, 143, 132, 0.6)
+}
+
+.danger input,
+.danger textarea,
+.danger select {
+  border-color: #aa3939;
+}
+
+.danger input:focus,
+.danger textarea:focus,
+.danger select:focus {
+  border-color: #aa3939;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(170, 57, 57, 0.6)
+}
+
+.help-inline {
+  margin-left: 20px;
+  color: #aa3939;
+  vertical-align: middle;
 }
