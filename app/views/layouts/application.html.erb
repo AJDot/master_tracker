@@ -15,6 +15,13 @@
       </div>
     </div>
     <main>
+      <ul style="list-style-type: circle;">To Do: Use JavaScript to Retrieve Total duration when category, skill, and description of a row is filled out.
+        <li>Ajax Request with data params equal to names of each item</li>
+        <li>Request will be to Spreadsheet/entries.json?category=category_name&skills=skill_name&description=description_name</li>
+        <li>Return information on groups of entries that matches parameters</li>
+        <li>Currently interested in total duration, return this to JS</li>
+        <li>Use this number to update the `total_duration` column of the corresponding row.</li>
+      </ul>
       <%= render 'layouts/flash_messages' %>
       <%= yield %>
     </main>

@@ -1,8 +1,8 @@
 class DescriptionsController < ApplicationController
   def index
-    @descriptions = search(params[:query], {limit: params[:limit]}).map(&:name)
     respond_to do |format|
       format.json do
+        @descriptions = search(params[:query], {limit: params[:limit]}).map(&:name)
         render json: @descriptions
       end
     end

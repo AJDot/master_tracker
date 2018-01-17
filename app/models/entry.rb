@@ -1,5 +1,5 @@
 class Entry < ActiveRecord::Base
-  DURATION_REGEX = /\A((0?[0-9]|1[0-9]|2[0-3]):([0-5][0-9]))\z/
+  DURATION_REGEX = /\A((0?[0-9]|1[0-9]|2[0-3]):([0-5]?[0-9]))\z/
 
   belongs_to :user
   belongs_to :category

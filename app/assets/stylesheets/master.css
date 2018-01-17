@@ -104,6 +104,12 @@ SPEADSHEET
   box-sizing: border-box;
 }
 
+#picker input[name*="category-"]:focus,
+#picker input[name*="skill-"]:focus,
+#picker input[name*="description-"]:focus {
+  box-shadow: none;
+}
+
 /*
 **************************************************
 AUTOCOMPLETE UI

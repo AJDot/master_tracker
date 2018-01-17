@@ -73,9 +73,10 @@ App.AutoLister.prototype = {
         break;
       case 'Enter':
         e.preventDefault();
+        e.stopPropagation();
         if (this.$selected) {
           this.$input.val(this.$selected.text());
-          this.$input.blur();
+          this.$input.trigger("blur.selectTrait")
           this.reset();
         // } else {
         //   this.reset();
@@ -108,7 +109,11 @@ App.AutoLister.prototype = {
 
   loseFocus: function(e) {
     e.preventDefault();
-    setTimeout(this.reset.bind(this), 300);
+    if (this.$listUI.is(":hover")) {
+      return;
+    } else {
+      this.reset();
+    }
   },
 
   fetchMatches: function(query, limit, callback) {
@@ -151,7 +156,7 @@ App.AutoLister.prototype = {
       which: 13,
       key: 'Enter',
     });
-    this.reset();
+    // this.reset();
   },
 
   scrollToSelected: function() {
@@ -170,9 +175,9 @@ App.AutoLister.prototype = {
   bindEvents: function() {
     this.$input.on('input', this.valueChanged.bind(this));
     this.$input.on('keydown', this.keydown.bind(this));
-    this.$input.on('focus', this.gainFocus.bind(this));
-    this.$input.on('focusout', this.loseFocus.bind(this));
-    this.$listUI.on('click', 'li', this.clickMatch.bind(this));
+    this.$input.on('focusin.selectTrait', this.gainFocus.bind(this));
+    this.$input.on('focusout.selectTrait', this.loseFocus.bind(this));
+    this.$listUI.on('click.selectTrait', 'li', this.clickMatch.bind(this));
   }
 };
 

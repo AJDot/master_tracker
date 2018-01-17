@@ -1,8 +1,8 @@
 class SkillsController < ApplicationController
   def index
-    @skills = search(params[:query], {limit: params[:limit]}).map(&:name)
     respond_to do |format|
       format.json do
+        @skills = search(params[:query], {limit: params[:limit]}).map(&:name)
         render json: @skills
       end
     end
