@@ -43,7 +43,7 @@ App.AutoLister.prototype = {
         this.matches = matches;
         this.selectedIndex = null;
         this.draw();
-      }.bind(this))
+      }.bind(this));
     } else {
       this.reset();
     }
@@ -128,7 +128,7 @@ App.AutoLister.prototype = {
         callback(json);
       },
       error: function(json) {
-        console.log("This didn't work");
+        console.log("There was a problem processing the request.");
       }
     });
   },
