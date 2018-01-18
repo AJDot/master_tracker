@@ -20,3 +20,4 @@
 //= require dropdown.js
 //= require auto_lister.js
 //= require entry_trait_selector.js
+//= require save_row.js

@@ -33,12 +33,18 @@ body {
   font: normal 16px Helvetica, Arial, sans-serif;
   padding: 0;
   margin: 0;
+  color: #444444;
+  background: #ffffff;
 }
 
 a {
   display: inline-block;
   text-decoration: none;
   color: #226666;
+}
+
+small {
+  font-style: italic;
 }
 
 ul {
@@ -88,9 +94,15 @@ SPEADSHEET
 
 #picker tbody td {
   width: 200px;
-  padding: 6px 10px;
+  /* padding: 6px 10px; */
   color: #eeeeee;
   background: #444444;
+}
+
+#picker td.duration-total {
+  color: #444444;
+  background: #ffffff;
+  padding: 6px 10px;
 }
 
 #picker input[name*="category-"],
@@ -109,6 +121,7 @@ SPEADSHEET
 #picker input[name*="description-"]:focus {
   box-shadow: none;
 }
+
 
 /*
 **************************************************
@@ -256,6 +269,7 @@ FLASH MESSAGES
 */
 
 .alert {
+  position: relative;
   padding: 10px;
   margin-bottom: 20px;
   color: #7d6713;
@@ -274,11 +288,15 @@ FLASH MESSAGES
 }
 
 .close {
-  float: right;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-right: 10px;
   font-size: 20px;
   font-weight: bold;
   line-height: 20px;
   cursor: pointer;
+  transform: translateY(-50%);
 }
 
 /*
@@ -357,4 +375,41 @@ select:hover option {
   margin-left: 20px;
   color: #aa3939;
   vertical-align: middle;
+}
+
+/*
+*************************************************
+SAVE
+*************************************************
+*/
+
+.save-container {
+  position: relative;
+  display: inline-block;
+}
+
+.save-container .save {
+  position: absolute;
+  min-width: 200px;
+  top: 0;
+  left: 100%;
+  padding: 4px 30px 4px 10px;
+  margin-left: 20px;
+  text-align: left;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+.save-container .save p {
+  margin: 0;
+}
+
+.save-success {
+  color: #2d882d;
+  background: #eeeeee;
+}
+
+.save-danger {
+  color: #aa3939;
+  background: #eeeeee;
 }

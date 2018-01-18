@@ -7,6 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 u = User.create(username: "Alex")
+u2 = User.create(username: "Jasmine")
+
 c = Category.new(name: "Software Development")
 u.categories << c
 s = Skill.new(name: "Ruby")
@@ -15,7 +17,6 @@ d = Description.new(name: "Mastery Tracker App")
 u.descriptions << d
 e = Entry.create(category: c, skill: s, description: d, user: u, duration: 60, date: '2018-01-14')
 
-u2 = User.create(username: "Jasmine")
 c2 = Category.new(name: "Profession")
 u2.categories << c2
 s2 = Skill.new(name: "Archaeology")

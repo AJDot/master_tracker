@@ -8,7 +8,7 @@ App.Alert = {
   },
 
   bindEvents: function() {
-    $('[data-dismiss]').on('click', this.removeAlert.bind(this));
+    $('body').on('click', 'a[data-dismiss]', this.removeAlert.bind(this));
   },
 
   init: function() {

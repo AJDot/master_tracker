@@ -181,7 +181,7 @@ App.AutoLister.prototype = {
   }
 };
 
-$(document).on("turbolinks:load", function() {
+App.CreateAutoListers = function() {
   var $categoryInputs = $('input[name*="category-"]');
   $categoryInputs.each(function(index, input) {
     new App.AutoLister($(input), "/categories.json");
@@ -196,4 +196,8 @@ $(document).on("turbolinks:load", function() {
   $descriptionInputs.each(function(index, input) {
     new App.AutoLister($(input), "/descriptions.json");
   });
+}
+
+$(document).on("turbolinks:load", function() {
+  App.CreateAutoListers();
 });

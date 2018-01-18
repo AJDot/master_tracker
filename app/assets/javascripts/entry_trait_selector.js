@@ -8,6 +8,7 @@ App.EntryTraitSelector = function($tr, url) {
 
   this.handleFocusout = debounce(this.handleFocusout.bind(this), 500);
   this.bindEvents();
+  this.fetchAndDisplayTotalDuration();
 };
 
 App.EntryTraitSelector.prototype = {
@@ -15,6 +16,10 @@ App.EntryTraitSelector.prototype = {
 
   handleFocusout: function(e) {
     e.preventDefault();
+    this.fetchAndDisplayTotalDuration();
+  },
+
+  fetchAndDisplayTotalDuration: function() {
     this.getInputValues();
     this.fetchEntries(this.inputValues, function(entries) {
       this.totalDuration = sumProps(entries, "duration");
@@ -61,7 +66,11 @@ App.EntryTraitSelector.prototype = {
   },
 
   displayTotalDuration: function() {
-    this.$durationTd.text(this.totalDuration || "No Match");
+    if (this.totalDuration === 0 && !this.hasJQueryValue(["$category", "$skill", "$description"])) {
+      this.$durationTd.text("");
+    } else {
+      this.$durationTd.text(mmToHHMM(this.totalDuration));
+    }
   },
 
   fetchEntries: function(query, callback) {
@@ -83,8 +92,12 @@ App.EntryTraitSelector.prototype = {
   },
 }
 
-$(document).on("turbolinks:load", function() {
+App.CreateEntryTraitSelectors = function() {
   $("#picker tbody tr").each(function() {
     new App.EntryTraitSelector($(this), "/api/v1/entries.json");
   });
+}
+
+$(document).on("turbolinks:load", function() {
+  App.CreateEntryTraitSelectors();
 });

@@ -1,0 +1,4 @@
+$('#picker tbody').html("<%= escape_javascript(render 'rows', spreadsheet: @spreadsheet) %>");
+
+App.CreateAutoListers();
+App.CreateEntryTraitSelectors();

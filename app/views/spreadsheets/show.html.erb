@@ -1,16 +1,18 @@
+<div class="add-row-container">
+  <%= link_to "Add Row", spreadsheet_rows_path(@spreadsheet), method: "POST", remote: true, class: 'btn add-row' %>
+</div>
 <div class="grid">
-  <table id="picker">
+  <table id="picker" data-id="<%= @spreadsheet.id %>">
     <thead>
       <tr>
         <th>Category</th>
         <th>Skill</th>
         <th>Description</th>
+        <th>Duration <small>(hh:mm)</small></th>
       </tr>
     </thead>
     <tbody>
-      <% 10.times do |row| %>
-        <%= render 'row', index: row %>
-      <% end %>
+      <%= render 'rows/rows', spreadsheet: @spreadsheet %>
     </tbody>
   </table>
 </div>

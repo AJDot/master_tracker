@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   root to: 'spreadsheets#show'
 
-  get '/', to: "spreadsheets#show", as: 'home'
+  resources :spreadsheets, only: [:show] do
+    resources :rows, only: [:create, :update]
+  end
 
   # namespace :api, :contraints => {:subdomain => "api"} do
   namespace :api, :defaults => {:format => :json} do
     namespace :v1 do
-      resources :entries, only: [:index]
+      resources :entries, only: [:index, :update]
     end
   end
   resources :entries, only: [:index, :new, :create]
