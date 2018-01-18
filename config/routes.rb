@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root to: 'spreadsheets#show'
 
-  resources :spreadsheets, only: [:show] do
-    resources :rows, only: [:create, :update]
+  resources :spreadsheets, only: [:show, :update] do
+    resources :rows, only: [:create]
   end
 
   # namespace :api, :contraints => {:subdomain => "api"} do
