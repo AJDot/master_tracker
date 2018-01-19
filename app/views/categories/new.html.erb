@@ -1,6 +1,6 @@
 <h3>Create New Category</h3>
 
-<%= form_for @category do |f| %>
+<%= form_for [@user, @category] do |f| %>
   <div class="form-group">
     <%= f.label :name %>
     <%= f.text_field :name %>

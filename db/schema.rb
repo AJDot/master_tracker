@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20180118020618) do
   end
 
   create_table "spreadsheets", force: :cascade do |t|
-    t.text "data"
+    t.string "name"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

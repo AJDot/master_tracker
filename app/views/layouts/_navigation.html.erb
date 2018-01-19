@@ -1,15 +1,33 @@
 <div class="nav_item">
   <%= link_to 'Mastery Tracker', root_path, class: 'brand' %>
 </div>
-<div class="btn-group nav_item">
-  <%= link_to '#', class: 'btn dropdown-toggle', 'data-toggle' => 'dropdown' do %>
-    New <span class='caret'></span>
-  <% end %>
-  <ul class='dropdown-menu'>
-    <li><%= link_to 'Category', new_category_path %></li>
-    <li><%= link_to 'Skill', new_skill_path %></li>
-    <li><%= link_to 'Description', new_description_path %></li>
-    <li class="divider"></li>
-    <li><%= link_to 'Entry', new_entry_path %></li>
-  </ul>
-</div>
+<% if logged_in? %>
+  <p class="nav_item"><small>Welcome, <%= current_user.username %>.</small></p>
+  <div class="btn-group nav_item">
+    <%= link_to '#', class: 'btn dropdown-toggle', 'data-toggle' => 'dropdown' do %>
+      New <span class='caret'></span>
+    <% end %>
+    <ul class='dropdown-menu'>
+      <li><%= link_to 'Category', new_user_category_path(current_user) %></li>
+      <li><%= link_to 'Skill', new_user_skill_path(current_user) %></li>
+      <li><%= link_to 'Description', new_user_description_path(current_user) %></li>
+      <li class="divider"></li>
+      <li><%= link_to 'Entry', new_user_entry_path(current_user) %></li>
+    </ul>
+  </div>
+
+  <div class="nav_item">
+    <%= link_to "View Profile", user_path(current_user), class: 'btn' %>
+  </div>
+
+  <div class="nav_item">
+    <%= link_to 'Logout', logout_path, class: 'btn' %>
+  </div>
+<% else %>
+  <div class="nav_item">
+    <%= link_to 'Register', register_path, class: 'btn' %>
+  </div>
+  <div class="nav_item">
+    <%= link_to 'Login', login_path, class: 'btn' %>
+  </div>
+<% end %>

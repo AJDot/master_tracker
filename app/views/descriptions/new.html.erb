@@ -1,6 +1,6 @@
 <h3>Create New Description</h3>
 
-<%= form_for @description do |f| %>
+<%= form_for [@user, @description] do |f| %>
   <div class="form-group">
     <%= f.label :name %>
     <%= f.text_field :name %>

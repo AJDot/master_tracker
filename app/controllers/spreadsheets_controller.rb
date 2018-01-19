@@ -1,6 +1,7 @@
 class SpreadsheetsController < ApplicationController
   def show
-    @spreadsheet = Spreadsheet.first
+    @spreadsheet = Spreadsheet.find params[:id]
+    @user = User.find params[:user_id]
   end
 
   def update

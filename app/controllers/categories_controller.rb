@@ -10,16 +10,17 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
+    @user = User.find params[:user_id]
   end
 
   def create
     @category = Category.new(category_params)
-    # Assign correct user after authentication
-    @category.user = User.first
+    user = User.find params[:user_id]
+    @category.user = user
 
     if @category.save
       flash[:success] = "Your category was created."
-      redirect_to root_path
+      redirect_to user_path(user)
     else
       render :new
     end

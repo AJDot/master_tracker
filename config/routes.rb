@@ -1,9 +1,23 @@
 Rails.application.routes.draw do
-  root to: 'spreadsheets#show'
+  root to: 'welcome#index'
 
-  resources :spreadsheets, only: [:show, :update] do
-    resources :rows, only: [:create]
+  resources :welcome, only: [:index]
+
+  get '/register', to: 'users#new', as: 'register'
+  get '/login', to: 'sessions#new', as: 'login'
+  post '/login', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy', as: 'logout'
+
+  resources :users, only: [:show, :create] do
+    resources :spreadsheets, only: [:show, :update], path: 'sheets' do
+      resources :rows, only: [:create]
+    end
+    resources :entries, only: [:index, :new, :create]
+    resources :categories, only: [:index, :new, :create]
+    resources :skills, only: [:index, :new, :create]
+    resources :descriptions, only: [:index, :new, :create]
   end
+
 
   # namespace :api, :contraints => {:subdomain => "api"} do
   namespace :api, :defaults => {:format => :json} do
@@ -11,8 +25,4 @@ Rails.application.routes.draw do
       resources :entries, only: [:index, :update]
     end
   end
-  resources :entries, only: [:index, :new, :create]
-  resources :categories, only: [:index, :new, :create]
-  resources :skills, only: [:index, :new, :create]
-  resources :descriptions, only: [:index, :new, :create]
 end

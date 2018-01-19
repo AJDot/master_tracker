@@ -10,16 +10,17 @@ class DescriptionsController < ApplicationController
 
   def new
     @description = Description.new
+    @user = User.find params[:user_id]
   end
 
   def create
     @description = Description.new(description_params)
-    # Assign correct user after authentication
-    @description.user = User.first
+    user = User.find params[:user_id]
+    @description.user = user
 
     if @description.save
       flash[:success] = "Your description was created."
-      redirect_to root_path
+      redirect_to user_path(user)
     else
       render :new
     end

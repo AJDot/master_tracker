@@ -32,8 +32,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'jquery-rails'
 
-# for fuzzy searching
-gem 'fuzzily'
+gem 'bcrypt'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

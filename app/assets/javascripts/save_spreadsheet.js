@@ -1,4 +1,4 @@
-App.SaveRow = function($table, url) {
+App.SaveSpreadsheet = function($table, url) {
   this.$table = $table;
   this.url = url;
 
@@ -6,8 +6,8 @@ App.SaveRow = function($table, url) {
   this.bindEvents();
 };
 
-App.SaveRow.prototype = {
-  constructor: App.SaveRow,
+App.SaveSpreadsheet.prototype = {
+  constructor: App.SaveSpreadsheet,
 
   gatherData: function() {
     var data = [];
@@ -52,5 +52,5 @@ App.SaveRow.prototype = {
 
 $(document).on("turbolinks:load", function() {
   var $table = $('#picker');
-  new App.SaveRow($table, "/spreadsheets/" + $table.attr('data-id'));
+  new App.SaveSpreadsheet($table, "/users/" + $table.attr('data-user_id') + "/sheets/" + $table.attr('data-id'));
 })
