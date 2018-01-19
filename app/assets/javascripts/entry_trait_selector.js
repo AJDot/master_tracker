@@ -1,9 +1,9 @@
 App.EntryTraitSelector = function($tr, url) {
   this.$tr = $tr;
   this.url = url;
-  this.$category = this.$tr.find('input[name*="category-"]');
-  this.$skill = this.$tr.find('input[name*="skill-"]');
-  this.$description = this.$tr.find('input[name*="description-"]');
+  this.$category = this.$tr.find('input.category');
+  this.$skill = this.$tr.find('input.skill');
+  this.$description = this.$tr.find('input.description');
   this.$durationTd = this.$tr.find('td.duration-total');
 
   this.handleFocusout = debounce(this.handleFocusout.bind(this), 500);
@@ -29,9 +29,18 @@ App.EntryTraitSelector.prototype = {
 
   getInputValues: function() {
     this.inputValues = {
-      category: this.$category.val(),
-      skill: this.$skill.val(),
-      description: this.$description.val(),
+      category: {
+        id: this.$category.attr('data-id'),
+        value: this.$category.val()
+      },
+      skill: {
+        id: this.$skill.attr('data-id'),
+        value: this.$skill.val()
+      },
+      description: {
+        id: this.$description.attr('data-id'),
+        value: this.$description.val()
+      }
     };
   },
 

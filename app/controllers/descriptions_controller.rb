@@ -2,7 +2,7 @@ class DescriptionsController < ApplicationController
   def index
     respond_to do |format|
       format.json do
-        @descriptions = search(params[:query], {limit: params[:limit]}).map(&:name)
+        @descriptions = search(params[:query], {limit: params[:limit]})
         render json: @descriptions
       end
     end

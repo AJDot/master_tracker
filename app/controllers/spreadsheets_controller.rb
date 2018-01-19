@@ -9,7 +9,7 @@ class SpreadsheetsController < ApplicationController
         @spreadsheet = Spreadsheet.find(params[:id])
         params[:data].each do |key, value|
           id = value["id"].to_i
-          params = value.permit("category", "skill", "description")
+          params = value.permit("category_id", "skill_id", "description_id")
           row = Row.find(id)
           row.update(params)
         end

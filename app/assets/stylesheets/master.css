@@ -105,9 +105,9 @@ SPEADSHEET
   padding: 6px 10px;
 }
 
-#picker input[name*="category-"],
-#picker input[name*="skill-"],
-#picker input[name*="description-"] {
+#picker input.category,
+#picker input.skill,
+#picker input.description {
   width: 100%;
   font: inherit;
   color: inherit;
@@ -116,9 +116,9 @@ SPEADSHEET
   box-sizing: border-box;
 }
 
-#picker input[name*="category-"]:focus,
-#picker input[name*="skill-"]:focus,
-#picker input[name*="description-"]:focus {
+#picker input.category:focus,
+#picker input.skill:focus,
+#picker input.description:focus {
   box-shadow: none;
 }
 

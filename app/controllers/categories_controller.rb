@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   def index
     respond_to do |format|
       format.json do
-        @categories = search(params[:query], {limit: params[:limit]}).map(&:name)
+        @categories = search(params[:query], {limit: params[:limit]})
         render json: @categories
       end
     end

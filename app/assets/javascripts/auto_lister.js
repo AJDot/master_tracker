@@ -31,7 +31,8 @@ App.AutoLister.prototype = {
     this.$listUI.show().children().remove();
     this.matches.forEach(function(match) {
       var $li = $('<li class="autocomplete-ui-choice"></li>');
-      $li.text(match);
+      $li.text(match.name);
+      $li.attr('data-id', match.id);
       this.$listUI.append($li)
     }.bind(this));
   },
@@ -76,19 +77,15 @@ App.AutoLister.prototype = {
         e.stopPropagation();
         if (this.$selected) {
           this.$input.val(this.$selected.text());
-          this.$input.trigger("blur.selectTrait")
+          this.$input.attr("data-id", this.$selected.attr('data-id'));
+          this.$input.trigger("blur.selectTrait");
           this.reset();
-        // } else {
-        //   this.reset();
-        //   this.fetchMatches("", null, function(matches) {
-        //     this.matches = matches;
-        //     this.draw();
-        //   }.bind(this))
         }
         break;
       case 'Tab':
         if (this.$selected) {
           this.$input.val(this.$selected.text());
+          this.$input.attr("data-id", this.$selected.attr('data-id'));
         }
         break;
       case 'Escape':
@@ -156,7 +153,6 @@ App.AutoLister.prototype = {
       which: 13,
       key: 'Enter',
     });
-    // this.reset();
   },
 
   scrollToSelected: function() {
@@ -182,17 +178,17 @@ App.AutoLister.prototype = {
 };
 
 App.CreateAutoListers = function() {
-  var $categoryInputs = $('input[name*="category-"]');
+  var $categoryInputs = $('input.category');
   $categoryInputs.each(function(index, input) {
     new App.AutoLister($(input), "/categories.json");
   });
 
-  var $skillInputs = $('input[name*="skill-"]');
+  var $skillInputs = $('input.skill');
   $skillInputs.each(function(index, input) {
     new App.AutoLister($(input), "/skills.json");
   });
 
-  var $descriptionInputs = $('input[name*="description-"]');
+  var $descriptionInputs = $('input.description');
   $descriptionInputs.each(function(index, input) {
     new App.AutoLister($(input), "/descriptions.json");
   });
