@@ -1,6 +1,7 @@
 <div class="nav_item">
   <%= link_to 'Mastery Tracker', root_path, class: 'brand' %>
 </div>
+
 <% if logged_in? %>
   <p class="nav_item"><small>Welcome, <%= current_user.username %>.</small></p>
   <div class="btn-group nav_item">
@@ -13,6 +14,7 @@
       <li><%= link_to 'Description', new_user_description_path(current_user) %></li>
       <li class="divider"></li>
       <li><%= link_to 'Entry', new_user_entry_path(current_user) %></li>
+      <li><%= link_to 'Spreadsheet', new_user_spreadsheet_path(current_user) %></li>
     </ul>
   </div>
 
@@ -23,6 +25,13 @@
   <div class="nav_item">
     <%= link_to 'Logout', logout_path, class: 'btn' %>
   </div>
+
+  <% if @spreadsheet %>
+    <small>
+      <p id="save_status" class="nav_item"></p>
+    </small>
+  <% end %>
+
 <% else %>
   <div class="nav_item">
     <%= link_to 'Register', register_path, class: 'btn' %>

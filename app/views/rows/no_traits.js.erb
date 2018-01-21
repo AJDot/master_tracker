@@ -1,0 +1,5 @@
+flashMsg = "<%= escape_javascript(render 'layouts/flash_messages') %>"
+
+$('#picker').before(flashMsg);
+
+<% flash.clear %>

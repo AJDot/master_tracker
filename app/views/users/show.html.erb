@@ -1,25 +1,28 @@
-<h2>Profile: <%= @user.username %></h2>
-<h3>Sheets:</h3>
-<ul>
-  <% @user.spreadsheets.each do |sheet| %>
-    <li><%= sheet.name %> | <%= link_to 'View', user_spreadsheet_path(@user, sheet), class: 'btn' %></li>
-  <% end %>
-</ul>
-<h3>Categories:</h3>
-<ul>
-  <% @user.categories.each do |cat| %>
-    <li><%= cat.name %></li>
-  <% end %>
-</ul>
-<h3>Skills:</h3>
-<ul>
-  <% @user.skills.each do |skill| %>
-    <li><%= skill.name %></li>
-  <% end %>
-</ul>
-<h3>Descriptions:</h3>
-<ul>
-  <% @user.descriptions.each do |desc| %>
-    <li><%= desc.name %></li>
-  <% end %>
-</ul>
+<div class="container">
+  <%= render 'shared/title', title: "Profile: #{@user.username}" %>
+
+  <h3>Sheets:</h3>
+  <ul>
+    <% @user.spreadsheets.each do |sheet| %>
+      <li><%= sheet.name %> | <%= link_to 'View', user_spreadsheet_path(@user, sheet), class: 'btn' %></li>
+    <% end %>
+  </ul>
+  <h3>Categories:</h3>
+  <ul>
+    <% @user.categories.each do |cat| %>
+      <li><%= cat.name %></li>
+    <% end %>
+  </ul>
+  <h3>Skills:</h3>
+  <ul>
+    <% @user.skills.each do |skill| %>
+      <li><%= skill.name %></li>
+    <% end %>
+  </ul>
+  <h3>Descriptions:</h3>
+  <ul>
+    <% @user.descriptions.each do |desc| %>
+      <li><%= desc.name %></li>
+    <% end %>
+  </ul>
+</div>

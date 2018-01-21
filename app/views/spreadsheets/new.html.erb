@@ -1,13 +1,13 @@
 <div class="container">
-  <%= render 'shared/title', title: 'Create New Category' %>
+  <%= render 'shared/title', title: 'Create New Spreadsheet' %>
 
-  <%= form_for [@user, @category] do |f| %>
+  <%= form_for [@user, @spreadsheet] do |f| %>
     <div class="form-group">
       <%= f.label :name %>
       <%= f.text_field :name %>
     </div>
     <div class="form-group">
-      <%= f.submit 'Create Category', class: 'btn' %>
+      <%= f.submit 'Create Spreadsheet', class: 'btn' %>
     </div>
   <% end %>
 </div>

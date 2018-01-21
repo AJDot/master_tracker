@@ -4,6 +4,24 @@ class SpreadsheetsController < ApplicationController
     @user = User.find params[:user_id]
   end
 
+  def new
+    @user = User.find params[:user_id]
+    @spreadsheet = Spreadsheet.new
+  end
+
+  def create
+    @user = User.find params[:user_id]
+    @spreadsheet = Spreadsheet.new(spreadsheet_params)
+    @spreadsheet.user = @user
+
+    if @spreadsheet.save
+      flash[:success] = "Your spreadsheet was created."
+      redirect_to user_spreadsheet_path(@user, @spreadsheet)
+    else
+      render :new
+    end
+  end
+
   def update
     respond_to do |format|
       format.js do
@@ -17,5 +35,11 @@ class SpreadsheetsController < ApplicationController
         head :no_content
       end
     end
+  end
+
+  private
+
+  def spreadsheet_params
+    params.require(:spreadsheet).permit(:name)
   end
 end

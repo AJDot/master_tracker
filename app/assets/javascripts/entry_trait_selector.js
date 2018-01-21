@@ -102,8 +102,10 @@ App.EntryTraitSelector.prototype = {
 }
 
 App.CreateEntryTraitSelectors = function() {
+  var path = window.location.pathname;
+  var userId = path.split("/")[2];
   $("#picker tbody tr").each(function() {
-    new App.EntryTraitSelector($(this), "/api/v1/entries.json");
+    new App.EntryTraitSelector($(this), "/api/v1/users/" + userId + "/entries.json");
   });
 }
 

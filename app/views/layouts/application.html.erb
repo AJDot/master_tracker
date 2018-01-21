@@ -5,6 +5,8 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "https://use.fontawesome.com/fa01417f2f.js"
+ %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -17,11 +19,13 @@
     <main>
       <%= render 'layouts/flash_messages' %>
       <ul>Clean Up
-        <li>Create header partial at 'shared/header' to be used by all pages</li>
         <li>Page to list all entries of user</li>
-        <li>Page to list all sheets of user</li>
+        <li>Feature: delete rows</li>
       </ul>
       <%= yield %>
     </main>
+    <footer>
+      <%= render 'layouts/footer' %>
+    </footer>
   </body>
 </html>

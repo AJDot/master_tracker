@@ -2,8 +2,15 @@ App.SaveSpreadsheet = function($table, url) {
   this.$table = $table;
   this.url = url;
 
-  this.save = debounce(this.save.bind(this), 5000);
-  this.bindEvents();
+  this.$saveStatus = $('#save_status');
+  this.saveInterval = null;
+  this.successTimout = null;
+  this.emptySuccessTimeout = null;
+
+  this.gatherData();
+  this.previous = this.current;
+
+  this.createInterval();
 };
 
 App.SaveSpreadsheet.prototype = {
@@ -11,46 +18,99 @@ App.SaveSpreadsheet.prototype = {
 
   gatherData: function() {
     var data = [];
-    this.$table.find('tbody tr').each(function() {
-      var $tr = $(this);
-      var $category = $tr.find('.category');
-      var $skill = $tr.find('.skill');
-      var $description = $tr.find('.description');
+    this.current = [];
+    this.$table.find('tbody tr').each(function(index, tr) {
+      var $tr = $(tr);
+      var categoryId = $tr.find('.category').attr('data-id');
+      var skillId = $tr.find('.skill').attr('data-id');
+      var descriptionId = $tr.find('.description').attr('data-id');
       var rowId = $tr.attr('data-id');
       data.push({
         id: rowId,
-        category_id: $category.attr('data-id'),
-        skill_id: $skill.attr('data-id'),
-        description_id: $description.attr('data-id')
+        category_id: categoryId,
+        skill_id: skillId,
+        description_id: descriptionId
       });
-    })
+      // this.current.push(rowId, categoryId, skillId, descriptionId);
+      this.pushToCurrent(rowId, categoryId, skillId, descriptionId);
+    }.bind(this));
     return data;
   },
 
-  save: function(e) {
-    e.preventDefault();
-    $tr = $(e.currentTarget);
-    var data = this.gatherData();
-
-    $.ajax({
-      url: this.url,
-      type: "PATCH",
-      data: { data: data },
-      dataType: "json",
-      success: function(rows) {
-      }.bind(this),
-      error: function(json) {
-        console.log("Error saving spreadsheet");
-      }.bind(this)
-    });
+  pushToCurrent: function() {
+    data = [].slice.call(arguments);
+    [].push.apply(this.current, data);
   },
 
-  bindEvents: function() {
-    this.$table.on("blur.saveSpreadsheet", "tbody tr", this.save.bind(this));
+  save: function() {
+    this.data = this.gatherData();
+
+    if (!equalArrays(this.current, this.previous)) {
+      $.ajax({
+        url: this.url,
+        type: "PATCH",
+        data: { data: this.data },
+        dataType: "json",
+        beforeSend: function() {
+          this.$saveStatus.text("Saving spreadsheet...");
+        }.bind(this),
+        success: function(rows) {
+          this.previous = this.current;
+          this.current = [];
+
+          if (this.successTimout) {
+            clearTimeout(this.successTimout);
+          }
+          this.successTimout = setTimeout(function() {
+            this.$saveStatus.text("Changes were saved.");
+          }.bind(this), 1000);
+
+          if (this.emptySuccessTimeout) {
+            clearTimeout(this.emptySuccessTimeout);
+          }
+          this.emptySuccessTimeout = setTimeout(function() {
+            this.$saveStatus.text("");
+          }.bind(this), 6000);
+        }.bind(this),
+        error: function(json) {
+          this.$saveStatus.text("Error saving changes.");
+        }.bind(this)
+      });
+    }
   },
+  createInterval: function() {
+    this.saveInterval = setInterval(this.save.bind(this), 5000);
+  },
+
+  removeInterval: function() {
+    if (this.saveInterval) {
+      clearInterval(this.saveInterval);
+    }
+  }
 }
 
+var saver;
 $(document).on("turbolinks:load", function() {
+  var path = window.location.pathname;
+  var userId = path.split("/")[2];
+  var spreadsheetId = path.split("/")[4];
+
   var $table = $('#picker');
-  new App.SaveSpreadsheet($table, "/users/" + $table.attr('data-user_id') + "/sheets/" + $table.attr('data-id'));
-})
+  if ($table.length > 0) {
+    saver = new App.SaveSpreadsheet($table, "/users/" + userId + "/sheets/" + spreadsheetId);
+  }
+});
+
+$(document).on("turbolinks:before-cache", function() {
+  if (saver) {
+    saver.removeInterval();
+    saver = null;
+  }
+});
+
+$(document).on("turbolinks:before-render", function() {
+  if (saver) {
+    saver.removeInterval();
+    saver = null;
+  }
+});

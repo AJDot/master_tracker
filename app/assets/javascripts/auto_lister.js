@@ -178,19 +178,22 @@ App.AutoLister.prototype = {
 };
 
 App.CreateAutoListers = function() {
+  var path = window.location.pathname;
+  var userId = path.split("/")[2];
+
   var $categoryInputs = $('input.category');
   $categoryInputs.each(function(index, input) {
-    new App.AutoLister($(input), "/categories.json");
+    new App.AutoLister($(input), "/api/v1/users/" + userId + "/categories.json");
   });
 
   var $skillInputs = $('input.skill');
   $skillInputs.each(function(index, input) {
-    new App.AutoLister($(input), "/skills.json");
+    new App.AutoLister($(input), "/api/v1/users/" + userId + "/skills.json");
   });
 
   var $descriptionInputs = $('input.description');
   $descriptionInputs.each(function(index, input) {
-    new App.AutoLister($(input), "/descriptions.json");
+    new App.AutoLister($(input), "/api/v1/users/" + userId + "/descriptions.json");
   });
 }
 

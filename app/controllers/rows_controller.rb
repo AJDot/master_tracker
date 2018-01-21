@@ -2,14 +2,26 @@ class RowsController < ApplicationController
   def create
     respond_to do |format|
       format.js do
+        @user = User.find params[:user_id]
         @spreadsheet = Spreadsheet.find(params[:spreadsheet_id])
-        @spreadsheet.rows << Row.new(
-          category: Category.first,
-          skill: Skill.first,
-          description: Description.first
-        )
 
-        render :add
+        category = @user.categories.first
+        skill = @user.skills.first
+        description = @user.descriptions.first
+
+        if category && skill && description
+          @spreadsheet.rows << Row.new(
+            category: @user.categories.first,
+            skill: @user.skills.first,
+            description: @user.descriptions.first
+          )
+
+          render :add
+        else
+          flash[:danger] = "You must have at least one category, skill, and description to create rows."
+          flash[:notice] = 'To create a category, skill, or description, use the "New" menu.'
+          render :no_traits
+        end
       end
     end
   end

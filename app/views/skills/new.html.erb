@@ -1,11 +1,13 @@
-<h3>Create New Skill</h3>
+<div class="container">
+  <%= render 'shared/title', title: 'Create New Skill' %>
 
-<%= form_for [@user, @skill] do |f| %>
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-  <div class="form-group">
-    <%= f.submit 'Create Skill', class: 'btn' %>
-  </div>
-<% end %>
+  <%= form_for [@user, @skill] do |f| %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="form-group">
+      <%= f.submit 'Create Skill', class: 'btn' %>
+    </div>
+  <% end %>
+</div>
