@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :spreadsheets, only: [:show, :new, :create, :update], path: 'sheets' do
       resources :rows, only: [:create]
     end
-    resources :entries, only: [:new, :create]
+    resources :entries, only: [:index, :new, :create]
     resources :categories, only: [:new, :create]
     resources :skills, only: [:new, :create]
     resources :descriptions, only: [:new, :create]

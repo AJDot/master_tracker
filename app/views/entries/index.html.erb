@@ -1,0 +1,27 @@
+<div class="container">
+  <%= render 'shared/title', title: 'All Entries' %>
+  <div class="rows">
+    <div class="row headings">
+      <div class="row_heading">Category</div>
+      <div class="row_heading">Skill</div>
+      <div class="row_heading">Description</div>
+      <div class="row_heading">Duration <small>(hh:mm)</small></div>
+    </div>
+    <% @entries.each do |entry| %>
+      <div class="row body">
+        <div class="row_item">
+          <%= entry.category.name %>
+        </div>
+        <div class="row_item">
+          <%= entry.skill.name %>
+        </div>
+        <div class="row_item">
+          <%= entry.description.name %>
+        </div>
+        <div class="row_item time_item">
+          <%= format_duration(entry.duration) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 class SpreadsheetsController < ApplicationController
+  before_action :require_user, only: [:show, :new, :create, :update]
   def show
     @spreadsheet = Spreadsheet.find params[:id]
     @user = User.find params[:user_id]

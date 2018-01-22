@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
   def require_user
     if !logged_in?
-      flash[:notice] = "You must be logged in to do that."
+      flash[:danger] = "You must be logged in to do that."
       redirect_to root_path
     end
   end
@@ -26,6 +26,6 @@ class ApplicationController < ActionController::Base
 
   def format_duration(dur)
     hh, mm = dur.to_i.divmod(60)
-    "#{hh}:#{mm}"
+    format("%2d:%02d", hh, mm)
   end
 end

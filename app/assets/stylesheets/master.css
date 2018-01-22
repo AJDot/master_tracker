@@ -89,41 +89,6 @@ SPEADSHEET
 **************************************************
 */
 
-#picker thead th,
-#picker tbody td {
-  width: 200px;
-  padding: 6px 10px;
-}
-
-#picker tbody td {
-  color: #eeeeee;
-  background: #444444;
-}
-
-#picker td.duration-total {
-  color: #444444;
-  background: #ffffff;
-  padding: 6px 10px;
-}
-
-#picker input.category,
-#picker input.skill,
-#picker input.description {
-  width: 100%;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: inherit;
-  border: none;
-  box-sizing: border-box;
-}
-
-#picker input.category:focus,
-#picker input.skill:focus,
-#picker input.description:focus {
-  box-shadow: none;
-}
-
 
 /*
 **************************************************
@@ -281,7 +246,7 @@ FLASH MESSAGES
 
 .alert-success {
   color: #ffffff;
-  background: #292939;
+  background: #2d882d;
 }
 
 .alert-notice {
@@ -514,6 +479,75 @@ footer i.fa {
 
 /*
 *************************************************
-FONT AWESOME ICONS
+DIV TABLES
 *************************************************
 */
+
+.rows {
+  min-width: 800px;
+  box-sizing: border-box;
+}
+
+.row {
+  display: block;
+}
+
+.row_heading,
+.row_item {
+  display: inline-block;
+  width: 195px;
+  padding: 6px 10px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+}
+
+.row_heading {
+  text-align: center;
+  font-weight: bold;
+}
+
+.row_item {
+  color: #eeeeee;
+  background: #444444;
+}
+
+.row_item.time_item {
+  text-align: right;
+}
+
+/*
+*************************************************
+PICKER
+*************************************************
+*/
+
+#picker input.category,
+#picker input.skill,
+#picker input.description {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: inherit;
+  border: none;
+  box-sizing: border-box;
+}
+
+#picker input.category:focus,
+#picker input.skill:focus,
+#picker input.description:focus {
+  box-shadow: none;
+}
+
+/*
+*************************************************
+CLEARFIX
+*************************************************
+*/
+
+.clearfix {
+  content: "";
+  display: block;
+  clear: both;
+}

@@ -1,12 +1,12 @@
-<tr data-id="<%= row.id %>">
-  <td>
+<div class="row body" data-id="<%= row.id %>">
+  <div class="row_item">
     <input type="text" class="category" data-id="<%= row.category.id %>" value="<%= row.category.name %>">
-  </td>
-  <td>
+  </div>
+  <div class="row_item">
     <input type="text" class="skill" data-id="<%= row.skill.id %>" value="<%= row.skill.name %>">
-  </td>
-  <td>
+  </div>
+  <div class="row_item">
     <input type="text" class="description" data-id="<%= row.description.id %>" value="<%= row.description.name %>">
-  </td>
-  <td class="duration-total"></td>
-</tr>
+  </div>
+  <div class="row_item duration-total time_item"></div>
+</div class="row">

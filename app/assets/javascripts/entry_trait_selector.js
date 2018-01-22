@@ -4,7 +4,7 @@ App.EntryTraitSelector = function($tr, url) {
   this.$category = this.$tr.find('input.category');
   this.$skill = this.$tr.find('input.skill');
   this.$description = this.$tr.find('input.description');
-  this.$durationTd = this.$tr.find('td.duration-total');
+  this.$durationTd = this.$tr.find('.duration-total');
 
   this.handleFocusout = debounce(this.handleFocusout.bind(this), 500);
   this.bindEvents();
@@ -104,7 +104,7 @@ App.EntryTraitSelector.prototype = {
 App.CreateEntryTraitSelectors = function() {
   var path = window.location.pathname;
   var userId = path.split("/")[2];
-  $("#picker tbody tr").each(function() {
+  $("#picker .row.body").each(function() {
     new App.EntryTraitSelector($(this), "/api/v1/users/" + userId + "/entries.json");
   });
 }

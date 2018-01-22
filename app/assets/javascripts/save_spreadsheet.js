@@ -19,7 +19,7 @@ App.SaveSpreadsheet.prototype = {
   gatherData: function() {
     var data = [];
     this.current = [];
-    this.$table.find('tbody tr').each(function(index, tr) {
+    this.$table.find('.row.body').each(function(index, tr) {
       var $tr = $(tr);
       var categoryId = $tr.find('.category').attr('data-id');
       var skillId = $tr.find('.skill').attr('data-id');

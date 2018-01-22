@@ -1,4 +1,4 @@
-$('#picker tbody').html("<%= escape_javascript(render 'rows', spreadsheet: @spreadsheet) %>");
+$('#picker').append("<%= escape_javascript(render 'row', row: @spreadsheet.rows.last) %>");
 
 App.CreateAutoListers();
 App.CreateEntryTraitSelectors();

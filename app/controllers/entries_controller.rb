@@ -1,4 +1,11 @@
 class EntriesController < ApplicationController
+  before_action :require_user, only: [:index, :new, :create]
+
+  def index
+    @user = User.find params[:user_id]
+    @entries = @user.entries
+  end
+
   def new
     @entry = Entry.new
     @user = User.find params[:user_id]
