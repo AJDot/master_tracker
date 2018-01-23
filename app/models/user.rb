@@ -5,9 +5,8 @@ class User < ActiveRecord::Base
   has_many :skills
   has_many :descriptions
 
-  has_secure_password # validations: false
+  has_secure_password
 
   validates :username, presence: true, uniqueness: true
-  validates :password, length: { minimum: 5 }, confirmation: true
-  validates :password_confirmation, presence: true
+  validates :password, length: { minimum: 5 }, confirmation: true, allow_nil: true
 end

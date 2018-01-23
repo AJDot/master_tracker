@@ -1,0 +1,12 @@
+= form_for @user do |f|
+  .form-group
+    = f.label :username
+    = f.text_field :username
+  .form-group
+    = f.label :password
+    = f.password_field :password
+    %br
+    = f.label :password_confirmation, 'Confirm Password'
+    = f.password_field :password_confirmation
+  .form-group
+    = f.submit(@user.new_record? ? 'Register' : 'Update', class: 'btn')
