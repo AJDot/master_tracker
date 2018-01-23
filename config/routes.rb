@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy', as: 'logout'
 
-  resources :users, only: [:show, :create] do
+  resources :users, only: [:show, :create, :edit, :update] do
     resources :spreadsheets, only: [:show, :new, :create, :update], path: 'sheets' do
       resources :rows, only: [:create, :destroy]
     end
