@@ -4,15 +4,15 @@
   <%= form_for [@user, @entry] do |f| %>
     <div class="form-group">
       <%= f.label :category_id, 'Category' %>
-      <%= f.select :category_id, Category.all.collect { |c| [c.name, c.id] }, {include_blank: true} %>
+      <%= f.select :category_id, @user.categories.collect { |c| [c.name, c.id] }, {include_blank: true} %>
     </div>
     <div class="form-group">
       <%= f.label :skill %>
-      <%= f.select :skill_id, Skill.all.collect { |s| [s.name, s.id] }, {include_blank: true} %>
+      <%= f.select :skill_id, @user.skills.collect { |s| [s.name, s.id] }, {include_blank: true} %>
     </div>
     <div class="form-group">
       <%= f.label :description %>
-      <%= f.select :description_id, Description.all.collect { |d| [d.name, d.id] }, {include_blank: true} %>
+      <%= f.select :description_id, @user.descriptions.collect { |d| [d.name, d.id] }, {include_blank: true} %>
     </div>
     <div class="form-group">
       <%= f.label :format_duration, "Duration" %>
@@ -20,7 +20,7 @@
     </div>
     <div class="form-group">
       <%= f.label :date %>
-      <%= f.date_field :date %>
+      <%= f.date_field :date, max: Date.today %>
     </div>
     <div class="form-group">
       <%= f.submit 'Create Entry', class: 'btn' %>

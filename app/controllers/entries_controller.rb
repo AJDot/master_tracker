@@ -16,7 +16,7 @@ class EntriesController < ApplicationController
     @user = User.find params[:user_id]
     if @user.entries << @entry
       flash[:success] = "Your entry was created."
-      redirect_to user_path(@user)
+      redirect_to user_entries_path(@user)
     else
       render :new
     end

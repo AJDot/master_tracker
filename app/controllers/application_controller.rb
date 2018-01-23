@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user, :logged_in?, :sum_duration, :format_duration
+  helper_method :format_entry_date
 
   def current_user
     @current_user ||= User.find session[:user_id] if session[:user_id]
@@ -27,5 +28,9 @@ class ApplicationController < ActionController::Base
   def format_duration(dur)
     hh, mm = dur.to_i.divmod(60)
     format("%2d:%02d", hh, mm)
+  end
+
+  def format_entry_date(date)
+    date.strftime('%b %e, %Y')
   end
 end

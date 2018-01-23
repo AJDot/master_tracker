@@ -484,7 +484,7 @@ DIV TABLES
 */
 
 .rows {
-  min-width: 800px;
+  min-width: 1000px;
   box-sizing: border-box;
 }
 

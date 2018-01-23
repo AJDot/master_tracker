@@ -10,6 +10,9 @@
     <% @entries.each do |entry| %>
       <div class="row body">
         <div class="row_item">
+          <%= format_entry_date(entry.date) %>
+        </div>
+        <div class="row_item">
           <%= entry.category.name %>
         </div>
         <div class="row_item">
