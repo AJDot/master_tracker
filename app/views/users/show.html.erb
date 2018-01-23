@@ -1,29 +1,50 @@
 <div class="container">
   <%= render 'shared/title', title: "Profile: #{@user.username}" %>
 
+  <h3>Entries:</h3>
+  <%= link_to 'View all', user_entries_path(@user), class: 'btn' %>
+  <br />
+
   <h3>Sheets:</h3>
-  <ul>
-    <% @user.spreadsheets.each do |sheet| %>
-      <li><%= sheet.name %> | <%= link_to 'View', user_spreadsheet_path(@user, sheet), class: 'btn' %></li>
-    <% end %>
-  </ul>
-  <%= link_to 'View all entries', user_entries_path(@user), class: 'btn' %>
+  <% if @user.spreadsheets.empty? %>
+    <%= render 'shared/no_resource_msg', resource: 'spreadsheet' %>
+  <% else %>
+    <%= render 'spreadsheets/links_list', user: @user %>
+  <% end %>
+  <br />
+
   <h3>Categories:</h3>
-  <ul>
-    <% @user.categories.each do |cat| %>
-      <li><%= cat.name %></li>
-    <% end %>
-  </ul>
+  <% if @user.categories.empty? %>
+    <%= render 'shared/no_resource_msg', resource: 'category' %>
+  <% else %>
+    <ul>
+      <% @user.categories.each do |cat| %>
+        <li><%= cat.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <br />
+
   <h3>Skills:</h3>
-  <ul>
-    <% @user.skills.each do |skill| %>
-      <li><%= skill.name %></li>
-    <% end %>
-  </ul>
+  <% if @user.skills.empty? %>
+    <%= render 'shared/no_resource_msg', resource: 'skill' %>
+  <% else %>
+    <ul>
+      <% @user.skills.each do |skill| %>
+        <li><%= skill.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <br />
+
   <h3>Descriptions:</h3>
-  <ul>
-    <% @user.descriptions.each do |desc| %>
-      <li><%= desc.name %></li>
-    <% end %>
-  </ul>
+  <% if @user.descriptions.empty? %>
+    <%= render 'shared/no_resource_msg', resource: 'description' %>
+  <% else %>
+    <ul>
+      <% @user.descriptions.each do |desc| %>
+        <li><%= desc.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>

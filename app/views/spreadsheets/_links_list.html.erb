@@ -1,0 +1,5 @@
+<ul>
+  <% user.spreadsheets.each do |sheet| %>
+    <li><%= link_to sheet.name.to_s, user_spreadsheet_path(user, sheet), class: 'btn' %></li>
+  <% end %>
+</ul>
