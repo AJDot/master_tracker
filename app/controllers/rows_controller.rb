@@ -26,4 +26,18 @@ class RowsController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @user = User.find params[:user_id]
+    @spreadsheet = Spreadsheet.find(params[:spreadsheet_id]);
+    @spreadsheet.rows.last.destroy
+    respond_to do |format|
+      format.html do
+        redirect_to user_spreadsheet_path @user, @spreadsheet
+      end
+      format.js do
+        render :destroy
+      end
+    end
+  end
 end

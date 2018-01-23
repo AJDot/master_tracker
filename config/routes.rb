@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :create] do
     resources :spreadsheets, only: [:show, :new, :create, :update], path: 'sheets' do
-      resources :rows, only: [:create]
+      resources :rows, only: [:create, :destroy]
     end
     resources :entries, only: [:index, :new, :create]
     resources :categories, only: [:new, :create]

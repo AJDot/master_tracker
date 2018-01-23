@@ -3,6 +3,7 @@
 
   <div class="add-row-container">
     <%= link_to "Add Row", user_spreadsheet_rows_path(@user, @spreadsheet), method: "POST", remote: true, class: 'btn add-row' %>
+    <%= link_to "Delete Last Row", user_spreadsheet_row_path(@user, @spreadsheet), method: "DELETE", remote: true, class: 'btn add-row' %>
   </div>
   <div id="picker" class="rows">
     <div class="row headings">
