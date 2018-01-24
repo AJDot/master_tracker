@@ -97,7 +97,7 @@ $(document).on("turbolinks:load", function() {
 
   var $table = $('#picker');
   if ($table.length > 0) {
-    saver = new App.SaveSpreadsheet($table, "/users/" + userId + "/sheets/" + spreadsheetId);
+    saver = new App.SaveSpreadsheet($table, "/users/" + userId + "/sheets/" + spreadsheetId + "/rows");
   }
 });
 

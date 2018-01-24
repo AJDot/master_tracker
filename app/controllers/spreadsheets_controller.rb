@@ -23,18 +23,20 @@ class SpreadsheetsController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find params[:user_id]
+    @spreadsheet = Spreadsheet.find params[:id]
+  end
+
   def update
-    respond_to do |format|
-      format.js do
-        @spreadsheet = Spreadsheet.find(params[:id])
-        params[:data].each do |key, value|
-          id = value["id"].to_i
-          params = value.permit("category_id", "skill_id", "description_id")
-          row = Row.find(id)
-          row.update(params)
-        end
-        head :no_content
-      end
+    @user = User.find params[:user_id]
+    @spreadsheet = Spreadsheet.find params[:id]
+
+    if @spreadsheet.update(spreadsheet_params)
+      flash[:success] = 'Spreadsheet updated.'
+      redirect_to user_spreadsheet_path(@user, @spreadsheet)
+    else
+      render :edit
     end
   end
 
