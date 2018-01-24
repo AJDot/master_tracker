@@ -19,6 +19,23 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find params[:user_id]
+    @category = Category.find params[:id]
+  end
+
+  def update
+    @user = User.find params[:user_id]
+    @category = Category.find params[:id]
+
+    if @category.update(category_params)
+      flash[:success] = "Category updated."
+      redirect_to user_path(@user)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def category_params

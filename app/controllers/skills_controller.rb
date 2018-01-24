@@ -19,6 +19,23 @@ class SkillsController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find params[:user_id]
+    @skill = Skill.find params[:id]
+  end
+
+  def update
+    @user = User.find params[:user_id]
+    @skill = Skill.find params[:id]
+
+    if @skill.update(skill_params)
+      flash[:success] = "Skill updated."
+      redirect_to user_path(@user)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def skill_params

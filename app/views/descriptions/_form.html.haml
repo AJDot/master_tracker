@@ -1,0 +1,6 @@
+= form_for [@user, @description] do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name
+  .form-group
+    = f.submit(@description.new_record? ? 'Create Description' : 'Update Description', class: 'btn')
