@@ -1,1 +1,3 @@
-$('#picker .row.body').last().remove();
+$('#picker .row.body').last().slideUp(300, function() {
+  $(this).remove();
+});
