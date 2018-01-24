@@ -515,6 +515,11 @@ DIV TABLES
   text-align: right;
 }
 
+.row_item.buttons {
+  color: #444444;
+  background: #ffffff;
+}
+
 /*
 *************************************************
 PICKER
@@ -561,4 +566,16 @@ CLEARFIX
   content: "";
   display: block;
   clear: both;
+}
+
+/*
+*************************************************
+TEST
+*************************************************
+*/
+
+ul.todo-list {
+  list-style: initial;
+  list-style-position: inside;
+  padding: 20px;
 }

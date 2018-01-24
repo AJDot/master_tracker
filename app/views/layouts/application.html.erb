@@ -18,9 +18,18 @@
     </div>
     <main>
       <%= render 'layouts/flash_messages' %>
-      <ul>
-        <li>Edit/Update Categories/Skills/Descriptions</li>
-        <li>Edit/Update Spreadsheet Name</li>
+      <ul class="todo-list">
+        <li>Write tests
+          <ul class="todo-list">
+            <li>Categories</li>
+            <li>Skills</li>
+            <li>Descriptions</li>
+            <li>Entries</li>
+            <li>Spreadsheets</li>
+            <li>Rows</li>
+            <li>Users</li>
+          </ul>
+        </li>
       </ul>
       <%= yield %>
     </main>
