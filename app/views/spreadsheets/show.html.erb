@@ -1,5 +1,6 @@
 <div class="container">
   <%= render 'shared/title', title: @spreadsheet.name %>
+  <%= link_to 'Edit Name', edit_user_spreadsheet_path(@user, @spreadsheet), class: 'btn' %>
 
   <div class="add-row-container">
     <%= link_to "Add Row", user_spreadsheet_rows_path(@user, @spreadsheet), method: "POST", remote: true, class: 'btn add-row' %>

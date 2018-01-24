@@ -1,0 +1,6 @@
+= form_for [@user, @spreadsheet] do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name
+  .form-group
+    = f.submit(@spreadsheet.new_record? ? 'Create Spreadsheet' : 'Update Spreadsheet', class: 'btn')

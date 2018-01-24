@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy', as: 'logout'
 
   resources :users, only: [:show, :create, :edit, :update] do
-    resources :spreadsheets, only: [:show, :new, :create, :update], path: 'sheets' do
+    resources :spreadsheets, only: [:show, :new, :create, :edit, :update], path: 'sheets' do
+      member do
+        patch 'rows', to: 'rows#update'
+      end
       resources :rows, only: [:create, :destroy]
     end
     resources :entries, only: [:index, :new, :create]
