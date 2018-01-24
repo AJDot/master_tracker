@@ -1,0 +1,18 @@
+= form_for [@user, @entry] do |f|
+  .form-group
+    = f.label :category_id, 'Category'
+    = f.select :category_id, @user.categories.collect { |c| [c.name, c.id] }, {include_blank: true}
+  .form-group
+    = f.label :skill_id
+    = f.select :skill_id, @user.skills.collect { |s| [s.name, s.id] }, {include_blank: true}
+  .form-group
+    = f.label :description_id
+    = f.select :description_id, @user.descriptions.collect { |d| [d.name, d.id] }, {include_blank: true}
+  .form-group
+    = f.label :duration, "Duration"
+    = f.text_field :duration, placeholder: "enter in minutes"
+  .form-group
+    = f.label :date
+    = f.date_field :date, max: Date.today
+  .form-group
+    = f.submit(@entry.new_record? ? 'Create Entry' : 'Edit Entry', class: 'btn')

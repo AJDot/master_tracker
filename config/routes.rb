@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       end
       resources :rows, only: [:create, :destroy]
     end
-    resources :entries, only: [:index, :new, :create]
+    resources :entries, only: [:index, :new, :create, :edit, :update]
     resources :categories, only: [:new, :create, :edit, :update]
     resources :skills, only: [:new, :create, :edit, :update]
     resources :descriptions, only: [:new, :create, :edit, :update]

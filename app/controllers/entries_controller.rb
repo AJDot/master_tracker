@@ -22,9 +22,26 @@ class EntriesController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find params[:user_id]
+    @entry = Entry.find params[:id]
+  end
+
+  def update
+    @user = User.find params[:user_id]
+    @entry = Entry.find params[:id]
+
+    if @entry.update(entry_params)
+      flash[:success] = "Entry updated."
+      redirect_to user_entries_path(@user)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def entry_params
-    params.require(:entry).permit(:format_duration, :date, :category_id, :skill_id, :description_id)
+    params.require(:entry).permit(:duration, :date, :category_id, :skill_id, :description_id)
   end
 end

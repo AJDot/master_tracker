@@ -2,6 +2,7 @@
   <%= render 'shared/title', title: 'All Entries' %>
   <div class="rows">
     <div class="row headings">
+      <div class="row_heading">Date</div>
       <div class="row_heading">Category</div>
       <div class="row_heading">Skill</div>
       <div class="row_heading">Description</div>
@@ -23,6 +24,9 @@
         </div>
         <div class="row_item time_item">
           <%= format_duration(entry.duration) %>
+        </div>
+        <div class="row_item buttons">
+          <%= link_to 'Edit', edit_user_entry_path(@user, entry) %>
         </div>
       </div>
     <% end %>
