@@ -1,4 +1,8 @@
-$('#picker').append("<%= escape_javascript(render 'row', row: @spreadsheet.rows.last) %>");
+var $row = $("<%= escape_javascript(render 'row', row: @spreadsheet.rows.last) %>")
+
+$row.hide();
+$('#picker').append($row);
+$row.slideDown();
 
 App.CreateAutoListers();
 App.CreateEntryTraitSelectors();

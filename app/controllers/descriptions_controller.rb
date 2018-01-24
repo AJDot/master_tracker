@@ -19,6 +19,23 @@ class DescriptionsController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find params[:user_id]
+    @description = Description.find params[:id]
+  end
+
+  def update
+    @user = User.find params[:user_id]
+    @description = Description.find params[:id]
+
+    if @description.update(description_params)
+      flash[:success] = "Description updated."
+      redirect_to user_path(@user)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def description_params

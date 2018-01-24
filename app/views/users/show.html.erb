@@ -18,8 +18,10 @@
     <%= render 'shared/no_resource_msg', resource: 'category' %>
   <% else %>
     <ul>
-      <% @user.categories.each do |cat| %>
-        <li><%= cat.name %></li>
+      <% @user.categories.each do |category| %>
+        <li>
+          <%= link_to category.name, edit_user_category_path(@user, category) %>
+        </li>
       <% end %>
     </ul>
   <% end %>
@@ -31,7 +33,9 @@
   <% else %>
     <ul>
       <% @user.skills.each do |skill| %>
-        <li><%= skill.name %></li>
+        <li>
+          <%= link_to skill.name, edit_user_skill_path(@user, skill) %>
+        </li>
       <% end %>
     </ul>
   <% end %>
@@ -43,7 +47,9 @@
   <% else %>
     <ul>
       <% @user.descriptions.each do |desc| %>
-        <li><%= desc.name %></li>
+        <li>
+          <%= link_to desc.name, edit_user_description_path(@user, desc) %>
+        </li>
       <% end %>
     </ul>
   <% end %>

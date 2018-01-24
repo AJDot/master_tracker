@@ -1,0 +1,6 @@
+= form_for [@user, @category] do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name
+  .form-group
+    = f.submit(@category.new_record? ? 'Create Category' : 'Update Category', class: 'btn')
