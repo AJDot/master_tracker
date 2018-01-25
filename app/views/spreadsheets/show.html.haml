@@ -1,0 +1,14 @@
+.container
+  = render 'shared/title', title: @spreadsheet.name, link: {name: 'edit', path: edit_user_spreadsheet_path(@user, @spreadsheet)}
+
+  = link_to "Add Row", user_spreadsheet_rows_path(@user, @spreadsheet), method: "POST", remote: true, class: 'btn btn-success'
+  = link_to "Delete Last Row", user_spreadsheet_row_path(@user, @spreadsheet), method: "DELETE", remote: true, class: 'btn btn-danger'
+  %hr
+  #picker.rows
+    .row.headings
+      .row_heading Category
+      .row_heading Skill
+      .row_heading Description
+      .row_heading Duration <small>(hh:mm)</small>
+    - @spreadsheet.rows.each do |row, index|
+      = render 'rows/row', index: index, row: row

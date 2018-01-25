@@ -28,6 +28,10 @@ body {
   background: #ffffff;
 }
 
+h1, h2, h3 {
+  margin: 0 0 20px 0;
+}
+
 a {
   display: inline-block;
   text-decoration: none;
@@ -59,6 +63,19 @@ NAVIGATION
 **************************************************
 */
 
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  box-sizing: border-box;
+}
+
+.navbar + * {
+  margin-top: 60px;
+}
+
 a.brand {
   font-size: 1.3em;
   padding: 10px 15px;
@@ -74,6 +91,7 @@ a.brand {
   padding: 0 20px;
   color: #ffffff;
   background: #292939;
+  box-sizing: border-box;
 }
 
 .nav_item {
@@ -148,6 +166,22 @@ BUTTONS
   border: 1px solid #cccccc;
   border-radius: 4px;
 }
+
+.btn-success {
+  color: #ffffff;
+  background: #2d882d;
+}
+
+.btn-danger {
+  color: #ffffff;
+  background: #aa3939;
+}
+
+/*
+**************************************************
+DROPDOWN MENU
+**************************************************
+*/
 
 .btn-group {
   position: relative;
@@ -314,6 +348,7 @@ select {
   width: 250px;
   padding: 6px 10px;
   margin-bottom: 5px;
+  font: inherit;
   color: #444444;
   background: #ffffff;
   vertical-align: middle;
@@ -455,9 +490,11 @@ FOOTER
 */
 
 footer {
+  width: 100%;
   text-align: center;
   color: #ffffff;
   background: #292939;
+  box-sizing: border-box;
 }
 
 footer .footer-inner {
@@ -484,7 +521,6 @@ DIV TABLES
 */
 
 .rows {
-  min-width: 1000px;
   box-sizing: border-box;
 }
 
@@ -562,10 +598,73 @@ CLEARFIX
 *************************************************
 */
 
-.clearfix {
+.clearfix::before,
+.clearfix::after {
   content: "";
   display: block;
   clear: both;
+}
+
+/*
+*************************************************
+PROFILE PAGE - BOXES
+*************************************************
+*/
+
+.box {
+  padding: 20px;
+  margin-bottom: 10px;
+  color: #ffffff;
+  background: #444444;
+}
+
+.box a:hover {
+  color: #ffffff;
+}
+
+.box h3 {
+  text-align: center;
+}
+
+/*
+*************************************************
+COLUMNS AND SIDES
+*************************************************
+*/
+
+[class*="col-"] {
+  float: left;
+  margin-left: .5%;
+  margin-right: .5%;
+  box-sizing: border-box;
+}
+
+.col-1-2 {
+  width: 49%;
+}
+
+.col-1-4 {
+  width: 24%;
+}
+
+.col-3-4 {
+  width: 74%;
+}
+
+.offset-1-4 {
+  margin-left: 25.5%;
+}
+
+.side {
+  float: left;
+}
+
+.side.right {
+  float: right;
+}
+
+span.right {
+  float: right;
 }
 
 /*

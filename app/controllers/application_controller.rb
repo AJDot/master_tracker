@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user, :logged_in?, :sum_duration, :format_duration
-  helper_method :format_entry_date
+  helper_method :format_entry_date, :format_spreadsheet_date
 
   def current_user
     @current_user ||= User.find session[:user_id] if session[:user_id]

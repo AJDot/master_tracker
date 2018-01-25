@@ -37,6 +37,8 @@ class RowsController < ApplicationController
           row = Row.find(id)
           row.update(params)
         end
+        @spreadsheet.updated_at = DateTime.now.to_s
+        @spreadsheet.save
         head :no_content
       end
     end
