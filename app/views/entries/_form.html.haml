@@ -15,4 +15,4 @@
     = f.label :date
     = f.date_field :date, max: Date.today
   .form-group
-    = f.submit(@entry.new_record? ? 'Create Entry' : 'Edit Entry', class: 'btn')
+    = f.submit(@entry.new_record? ? 'Create Entry' : 'Edit Entry', class: 'btn btn-success')

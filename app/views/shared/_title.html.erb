@@ -1,7 +1,11 @@
 <% subtitle ||= false %>
+<% link ||= false %>
 
 <h2 class='title'>
   <%= title %>
+  <% if link %>
+    | <small><%= link_to link[:name], link[:path] %></small>
+  <% end %>
 </h2>
 <% if subtitle %>
   <h3 class='subtitle'>
