@@ -19,6 +19,11 @@ describe Category do
     expect(ruby.rows.count).to eq(2)
   end
 
+  it "does not save a without a user" do
+    ruby = Category.create(name: 'ruby')
+    expect(Category.count).to eq(0)
+  end
+
   it "does not save a without a name" do
     ruby = Category.create(user: Fabricate(:user))
     expect(Category.count).to eq(0)

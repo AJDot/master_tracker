@@ -22,4 +22,29 @@ describe Row do
     row = Fabricate(:row, spreadsheet: spreadsheet)
     expect(row.spreadsheet).to eq(spreadsheet)
   end
+
+  it "does not save a without a spreadsheet" do
+    row = Fabricate.build(:row, spreadsheet: nil)
+    row.save
+    expect(Row.count).to eq(0)
+  end
+
+  it "does not save a without a category" do
+    row = Fabricate.build(:row, category: nil)
+    row.save
+    expect(Row.count).to eq(0)
+  end
+
+  it "does not save a without a skill" do
+    row = Fabricate.build(:row, skill: nil)
+    row.save
+    expect(Row.count).to eq(0)
+  end
+
+  it "does not save a without a description" do
+    row = Fabricate.build(:row, description: nil)
+    row.save
+    expect(Row.count).to eq(0)
+  end
+
 end

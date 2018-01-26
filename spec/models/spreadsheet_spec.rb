@@ -12,6 +12,12 @@ describe Spreadsheet do
     expect(new_sheet.rows.count).to eq(2)
   end
 
+  it "does not save a without a user" do
+    ruby = Fabricate.build(:spreadsheet, user: nil)
+    ruby.save
+    expect(Spreadsheet.count).to eq(0)
+  end
+
   it "won't save without a name" do
     new_sheet = Fabricate.build(:spreadsheet, name: nil)
     new_sheet.save

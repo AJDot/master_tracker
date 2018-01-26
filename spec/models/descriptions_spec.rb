@@ -19,6 +19,11 @@ describe Description do
     expect(ruby.rows.count).to eq(2)
   end
 
+  it "does not save a without a user" do
+    ruby = Description.create(name: 'ruby')
+    expect(Description.count).to eq(0)
+  end
+
   it "does not save a without a name" do
     ruby = Description.create(user: Fabricate(:user))
     expect(Description.count).to eq(0)

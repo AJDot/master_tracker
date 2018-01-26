@@ -19,6 +19,11 @@ describe Skill do
     expect(ruby.rows.count).to eq(2)
   end
 
+  it "does not save a without a user" do
+    ruby = Skill.create(name: 'ruby')
+    expect(Skill.count).to eq(0)
+  end
+
   it "does not save a without a name" do
     ruby = Skill.create(user: Fabricate(:user))
     expect(Skill.count).to eq(0)

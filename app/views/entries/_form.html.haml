@@ -1,13 +1,13 @@
 = form_for [@user, @entry] do |f|
   .form-group
     = f.label :category_id, 'Category'
-    = f.select :category_id, @user.categories.collect { |c| [c.name, c.id] }, {include_blank: true}
+    = f.select :category_id, @user.categories.collect { |c| [c.name, c.id] }
   .form-group
     = f.label :skill_id
-    = f.select :skill_id, @user.skills.collect { |s| [s.name, s.id] }, {include_blank: true}
+    = f.select :skill_id, @user.skills.collect { |s| [s.name, s.id] }
   .form-group
     = f.label :description_id
-    = f.select :description_id, @user.descriptions.collect { |d| [d.name, d.id] }, {include_blank: true}
+    = f.select :description_id, @user.descriptions.collect { |d| [d.name, d.id] }
   .form-group
     = f.label :duration, "Duration"
     = f.text_field :duration, placeholder: "enter in minutes"

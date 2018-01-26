@@ -3,6 +3,7 @@ class Spreadsheet < ActiveRecord::Base
   has_many :rows
 
   validates :name, presence: true, uniqueness: { scope: :user_id }
+  validates_presence_of :user
 
   def create_date
     created_at.strftime('%b %e, %Y')
