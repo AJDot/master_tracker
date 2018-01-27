@@ -1,5 +1,5 @@
 class SkillsController < ApplicationController
-  before_action :require_user, only: [:new, :create]
+  before_action :require_user, only: [:new, :create, :edit, :update]
 
   def new
     @skill = Skill.new
