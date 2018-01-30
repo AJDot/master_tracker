@@ -51,5 +51,5 @@
       = render 'shared/no_resource_msg', resource: 'entry'
     - else
       %ul
-        - @user.entries.last(5).each do |entry|
+        - @user.recent_entries.each do |entry|
           %li= "#{format_duration(entry.duration)} | #{entry.category.name} | #{entry.skill.name} | #{entry.description.name} | #{format_entry_date(entry.updated_at)}"
