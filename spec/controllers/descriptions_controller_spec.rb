@@ -9,6 +9,7 @@ describe DescriptionsController, type: :controller do
 
       it "sets @description" do
         expect(assigns(:description)).to be_new_record
+        expect(assigns(:description)).to be_instance_of(Description)
       end
 
       it "sets @user" do
@@ -63,6 +64,7 @@ describe DescriptionsController, type: :controller do
         end
 
         it "sets @description" do
+          expect(assigns(:description)).to be_new_record
           expect(assigns(:description).name).to eq("")
         end
       end
@@ -90,10 +92,6 @@ describe DescriptionsController, type: :controller do
       before do
         session[:user_id] = current_user.id
         get :edit, params: { id: description.id, user_id: current_user.id}
-      end
-
-      it "renders the edit template" do
-        expect(response).to render_template :edit
       end
 
       it "sets @user" do
@@ -172,7 +170,11 @@ describe DescriptionsController, type: :controller do
       before do
         user = Fabricate(:user)
         description = Fabricate(:description, name: "old_name", user: user)
-        post :update, params: { description: { name: nil }, user_id: user.id, id: description.id }
+        post :update, params: { description: { name: "new_name" }, user_id: user.id, id: description.id }
+      end
+
+      it "does not update the description" do
+        expect(Description.first.name).to eq("old_name")
       end
 
       it "redirects to the login path" do

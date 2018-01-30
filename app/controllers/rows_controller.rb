@@ -1,5 +1,5 @@
 class RowsController < ApplicationController
-  before_action :require_user, only: [:create]
+  before_action :require_user
 
   def create
     respond_to do |format|
