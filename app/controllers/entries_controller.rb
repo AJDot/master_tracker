@@ -1,5 +1,5 @@
 class EntriesController < ApplicationController
-  before_action :require_user, only: [:index, :new, :create]
+  before_action :require_user, only: [:index, :new, :create, :edit, :update]
 
   def index
     @user = User.find params[:user_id]

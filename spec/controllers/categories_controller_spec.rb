@@ -9,6 +9,7 @@ describe CategoriesController, type: :controller do
 
       it "sets @category" do
         expect(assigns(:category)).to be_new_record
+        expect(assigns(:category)).to be_instance_of(Category)
       end
 
       it "sets @user" do
@@ -63,6 +64,7 @@ describe CategoriesController, type: :controller do
         end
 
         it "sets @category" do
+          expect(assigns(:category)).to be_new_record
           expect(assigns(:category).name).to eq("")
         end
       end
@@ -90,10 +92,6 @@ describe CategoriesController, type: :controller do
       before do
         session[:user_id] = current_user.id
         get :edit, params: { id: category.id, user_id: current_user.id}
-      end
-
-      it "renders the edit template" do
-        expect(response).to render_template :edit
       end
 
       it "sets @user" do
@@ -172,7 +170,11 @@ describe CategoriesController, type: :controller do
       before do
         user = Fabricate(:user)
         category = Fabricate(:category, name: "old_name", user: user)
-        post :update, params: { category: { name: nil }, user_id: user.id, id: category.id }
+        post :update, params: { category: { name: "new_name" }, user_id: user.id, id: category.id }
+      end
+
+      it "does not update the category" do
+        expect(Category.first.name).to eq("old_name")
       end
 
       it "redirects to the login path" do

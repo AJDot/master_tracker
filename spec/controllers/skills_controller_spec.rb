@@ -9,6 +9,7 @@ describe SkillsController, type: :controller do
 
       it "sets @skill" do
         expect(assigns(:skill)).to be_new_record
+        expect(assigns(:skill)).to be_instance_of(Skill)
       end
 
       it "sets @user" do
@@ -63,6 +64,7 @@ describe SkillsController, type: :controller do
         end
 
         it "sets @skill" do
+          expect(assigns(:skill)).to be_new_record
           expect(assigns(:skill).name).to eq("")
         end
       end
@@ -90,10 +92,6 @@ describe SkillsController, type: :controller do
       before do
         session[:user_id] = current_user.id
         get :edit, params: { id: skill.id, user_id: current_user.id}
-      end
-
-      it "renders the edit template" do
-        expect(response).to render_template :edit
       end
 
       it "sets @user" do
@@ -172,7 +170,11 @@ describe SkillsController, type: :controller do
       before do
         user = Fabricate(:user)
         skill = Fabricate(:skill, name: "old_name", user: user)
-        post :update, params: { skill: { name: nil }, user_id: user.id, id: skill.id }
+        post :update, params: { skill: { name: "new_name" }, user_id: user.id, id: skill.id }
+      end
+
+      it "does not update the skill" do
+        expect(Skill.first.name).to eq("old_name")
       end
 
       it "redirects to the login path" do
