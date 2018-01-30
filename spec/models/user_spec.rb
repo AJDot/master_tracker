@@ -45,4 +45,34 @@ describe User do
     new_user = User.create(password: 'password')
     expect(User.count).to eq(0)
   end
+
+  describe '#recent_entries(n)' do
+    let(:current_user) { Fabricate(:user) }
+    let(:entries) { [] }
+    before do
+      6.times do |n|
+        entries << Fabricate(:entry, user: current_user, created_at: n.days.ago)
+      end
+    end
+
+    it "return n entries for user" do
+      expect(current_user.recent_entries(3).count).to eq(3)
+    end
+
+    it "returns n most recent entries for user" do
+      expect(current_user.recent_entries(3)).to match_array(entries[0..2])
+    end
+
+    it "returns 5 most recent entries by default" do
+      expect(current_user.recent_entries.count).to eq(5)
+    end
+
+    it "returns most recent entries in reverse chronological order" do
+      expect(current_user.recent_entries(3)).to match entries[0..2]
+    end
+
+    it "return all entries if less than n entries exist" do
+      expect(current_user.recent_entries(7)).to match entries
+    end
+  end
 end
