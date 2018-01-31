@@ -1,0 +1,11 @@
+.row.body{"data-id" => "#{row.id}"}
+  .row_item
+    %input.category{type: "text", "data-id" => "#{row.category.id}", value: "#{row.category.name}"}
+  .row_item
+    %input.skill{type: "text", "data-id" => "#{row.skill.id}", value: "#{row.skill.name}"}
+  .row_item
+    %input.description{type: "text", "data-id" => "#{row.description.id}", value: "#{row.description.name}"}
+  .row_item.duration-total.time_item
+  .row_item.duration-today.time_item
+  .row_item.duration-yesterday.time_item
+  .row_item.duration-month.time_item

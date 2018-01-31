@@ -9,6 +9,9 @@
       .row_heading Category
       .row_heading Skill
       .row_heading Description
-      .row_heading Duration <small>(hh:mm)</small>
+      .row_heading.time_heading All-Time <br/> <small>(hh:mm)</small>
+      .row_heading.time_heading Today <br/> <small>(hh:mm)</small>
+      .row_heading.time_heading Yesterday <br/> <small>(hh:mm)</small>
+      .row_heading.time_heading This Month <br/> <small>(hh:mm)</small>
     - @spreadsheet.rows.each do |row, index|
       = render 'rows/row', index: index, row: row
