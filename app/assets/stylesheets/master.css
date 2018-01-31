@@ -523,10 +523,12 @@ DIV TABLES
 
 .rows {
   box-sizing: border-box;
+  overflow-x: auto;
 }
 
 .row {
   display: block;
+  white-space: nowrap;
 }
 
 .row_heading,
@@ -543,12 +545,17 @@ DIV TABLES
   font-weight: bold;
 }
 
+.row_heading.time_heading {
+  width: 100px;
+}
+
 .row_item {
   color: #eeeeee;
   background: #444444;
 }
 
 .row_item.time_item {
+  width: 100px;
   text-align: right;
 }
 
