@@ -522,14 +522,16 @@ DIV TABLES
 */
 
 .container {
-  overflow-y: visible;
 }
 
 .rows {
-  padding-bottom: 200px;
   box-sizing: border-box;
-  overflow-x: scroll;
+  overflow-x: auto;
   white-space: nowrap;
+}
+
+.pb-5 {
+  padding-bottom: 200px;
 }
 
 .row {
@@ -637,6 +639,11 @@ PROFILE PAGE - BOXES
 
 .box h3 {
   text-align: center;
+}
+
+.box.nowrap {
+  white-space: nowrap;
+  overflow-x: auto;
 }
 
 /*

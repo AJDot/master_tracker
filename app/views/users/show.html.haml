@@ -4,7 +4,9 @@
 
   %section.side.right.col-1-4
     .box
-      %h3 Categories
+      %h3
+        Categories
+        %small= "(#{@user.categories.count})"
       - if @user.categories.empty?
         = render 'shared/no_resource_msg', resource: 'category'
       - else
@@ -14,7 +16,9 @@
               = link_to category.name, edit_user_category_path(@user, category)
 
     .box
-      %h3 Skills
+      %h3
+        Skills
+        %small= "(#{@user.skills.count})"
       - if @user.skills.empty?
         = render 'shared/no_resource_msg', resource: 'skill'
       - else
@@ -24,7 +28,9 @@
               = link_to skill.name, edit_user_skill_path(@user, skill)
 
     .box
-      %h3 Descriptions
+      %h3
+        Descriptions
+        %small= "(#{@user.descriptions.count})"
       - if @user.descriptions.empty?
         = render 'shared/no_resource_msg', resource: 'description'
       - else
@@ -33,8 +39,10 @@
             %li
               = link_to desc.name, edit_user_description_path(@user, desc)
 
-  %section.box.col-3-4
-    %h3 Sheets
+  %section.box.col-3-4.nowrap
+    %h3
+      Sheets
+      %small= "(#{@user.spreadsheets.count})"
     - if @user.spreadsheets.empty?
       = render 'shared/no_resource_msg', resource: 'spreadsheet'
     - else
@@ -42,14 +50,20 @@
 
   %br
 
-  %section.box.col-3-4
+  %section.box.col-3-4.nowrap
     %h3
       Entries
+      %small= "(#{@user.entries.count})"
       %span.right
         = link_to 'View all', user_entries_path(@user)
     - if @user.entries.empty?
       = render 'shared/no_resource_msg', resource: 'entry'
     - else
-      %ul
+      .rows
         - @user.recent_entries.each do |entry|
-          %li= "#{format_duration(entry.duration)} | #{entry.category.name} | #{entry.skill.name} | #{entry.description.name} | #{format_entry_date(entry.updated_at)}"
+          .row
+            .row_item.time_item= "#{format_duration(entry.duration)}"
+            .row_item= "#{entry.category.name}"
+            .row_item= "#{entry.skill.name}"
+            .row_item= "#{entry.description.name}"
+            .row_item= "#{format_entry_date(entry.updated_at)}"

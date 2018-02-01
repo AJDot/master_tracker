@@ -4,7 +4,7 @@
   = link_to "Add Row", user_spreadsheet_rows_path(@user, @spreadsheet), method: "POST", remote: true, class: 'btn btn-success'
   = link_to "Delete Last Row", user_spreadsheet_row_path(@user, @spreadsheet), method: "DELETE", remote: true, class: 'btn btn-danger'
   %hr
-  #picker.rows
+  #picker.rows.pb-5
     .row.headings
       .row_heading Category
       .row_heading Skill
