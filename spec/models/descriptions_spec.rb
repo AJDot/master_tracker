@@ -19,6 +19,12 @@ describe Description do
     expect(ruby.rows.count).to eq(2)
   end
 
+  it 'generates a random token before creation' do
+    user = Fabricate(:user)
+    ruby = Description.create(name: 'ruby', user: user)
+    expect(Description.first.token).to be_present
+  end
+
   it "does not save a without a user" do
     ruby = Description.create(name: 'ruby')
     expect(Description.count).to eq(0)

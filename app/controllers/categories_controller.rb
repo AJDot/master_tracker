@@ -3,12 +3,12 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
   end
 
   def create
     @category = Category.new(category_params)
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
     @category.user = @user
 
     if @category.save
@@ -20,13 +20,13 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    @user = User.find params[:user_id]
-    @category = Category.find params[:id]
+    @user = User.find_by username: params[:user_id]
+    @category = Category.find_by token: params[:id]
   end
 
   def update
-    @user = User.find params[:user_id]
-    @category = Category.find params[:id]
+    @user = User.find_by username: params[:user_id]
+    @category = Category.find_by token: params[:id]
 
     if @category.update(category_params)
       flash[:success] = "Category updated."

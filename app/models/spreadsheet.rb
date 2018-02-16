@@ -1,9 +1,13 @@
 class Spreadsheet < ActiveRecord::Base
+  include Tokenable
+
   belongs_to :user
   has_many :rows
 
   validates :name, presence: true, uniqueness: { scope: :user_id }
   validates_presence_of :user
+
+  before_create :generate_token
 
   def create_row
     category = user.categories.first
@@ -28,5 +32,9 @@ class Spreadsheet < ActiveRecord::Base
 
   def update_time
     updated_at.strftime('%l:%M %p')
+  end
+
+  def to_param
+    token
   end
 end

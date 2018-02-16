@@ -6,7 +6,7 @@ describe SpreadsheetsController do
       let(:spreadsheet) { Fabricate(:spreadsheet, user: current_user)}
       before do
         session[:user_id] = current_user.id
-        get :show, params: { id: spreadsheet.id, user_id: current_user.id }
+        get :show, params: { id: spreadsheet.token, user_id: current_user.username }
       end
 
       it "sets @spreadsheet" do
@@ -22,7 +22,7 @@ describe SpreadsheetsController do
       let(:user) { Fabricate(:user) }
       let(:spreadsheet) { Fabricate(:spreadsheet, user: user)}
       it "redirects to login path" do
-        get :show, params: { id: spreadsheet.id, user_id: user.id }
+        get :show, params: { id: spreadsheet.token, user_id: user.id }
         expect(response).to redirect_to login_path
       end
     end
@@ -33,7 +33,7 @@ describe SpreadsheetsController do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
-        get :new, params: { user_id: current_user.id }
+        get :new, params: { user_id: current_user.username }
       end
 
       it "sets @spreadsheet to new spreadsheet" do
@@ -63,7 +63,7 @@ describe SpreadsheetsController do
 
       context "with valid inputs" do
         before do
-          post :create, params: { spreadsheet: Fabricate.attributes_for(:spreadsheet), user_id: current_user.id }
+          post :create, params: { spreadsheet: Fabricate.attributes_for(:spreadsheet), user_id: current_user.username }
         end
 
         it "creates an spreadsheet" do
@@ -85,7 +85,7 @@ describe SpreadsheetsController do
 
       context "with invalid inputs" do
         before do
-          post :create, params: { spreadsheet: Fabricate.attributes_for(:spreadsheet, name: ""), user_id: current_user.id }
+          post :create, params: { spreadsheet: Fabricate.attributes_for(:spreadsheet, name: ""), user_id: current_user.username }
         end
 
         it "does not create a spreadsheet" do
@@ -125,7 +125,7 @@ describe SpreadsheetsController do
 
       before do
         session[:user_id] = current_user.id
-        get :edit, params: { id: spreadsheet.id, user_id: current_user.id }
+        get :edit, params: { id: spreadsheet.token, user_id: current_user.username }
       end
 
       it "sets @user" do
@@ -142,7 +142,7 @@ describe SpreadsheetsController do
       let(:spreadsheet) { Fabricate(:spreadsheet, user: user) }
 
       before do
-        get :edit, params: { id: spreadsheet.id, user_id: user.id }
+        get :edit, params: { id: spreadsheet.token, user_id: user.id }
       end
 
       it "redirects to login path" do
@@ -165,7 +165,7 @@ describe SpreadsheetsController do
 
       context "with valid inputs" do
         before do
-          patch :update, params: { spreadsheet: { name: "new_name" }, user_id: current_user.id, id: spreadsheet.id }
+          patch :update, params: { spreadsheet: { name: "new_name" }, user_id: current_user.username, id: spreadsheet.token }
         end
 
         it "redirects to the user's spreadsheet show page" do
@@ -183,7 +183,7 @@ describe SpreadsheetsController do
 
       context "with invalid inputs" do
         before do
-          patch :update, params: { spreadsheet: { name: "" }, user_id: current_user.id, id: spreadsheet.id }
+          patch :update, params: { spreadsheet: { name: "" }, user_id: current_user.username, id: spreadsheet.token }
         end
 
         it "does not update an spreadsheet" do
@@ -204,7 +204,7 @@ describe SpreadsheetsController do
       let(:user) { Fabricate(:user) }
       let(:spreadsheet) { Fabricate(:spreadsheet, user: user, name: "old_name") }
       before do
-        patch :update, params: { spreadsheet: { duration: "new_name" }, user_id: user.id, id: spreadsheet.id }
+        patch :update, params: { spreadsheet: { duration: "new_name" }, user_id: user.id, id: spreadsheet.token }
       end
 
       it "does not update the spreadsheet" do

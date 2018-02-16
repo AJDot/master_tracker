@@ -32,7 +32,8 @@ App.AutoLister.prototype = {
     this.matches.forEach(function(match) {
       var $li = $('<li class="autocomplete-ui-choice"></li>');
       $li.text(match.name);
-      $li.attr('data-id', match.id);
+      // $li.attr('data-id', match.id);
+      $li.attr('data-id', match.token);
       this.$listUI.append($li)
     }.bind(this));
   },

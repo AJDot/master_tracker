@@ -23,6 +23,12 @@ describe Entry do
     expect(new_entry.description).to eq(new_desc)
   end
 
+  it 'generates a random token before creation' do
+    user = Fabricate(:user)
+    ruby = Fabricate(:entry)
+    expect(Entry.first.token).to be_present
+  end
+
   it "won't save without a category" do
     new_entry = Fabricate.build(:entry, category: nil)
     new_entry.save

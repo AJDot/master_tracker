@@ -19,6 +19,12 @@ describe Category do
     expect(ruby.rows.count).to eq(2)
   end
 
+  it 'generates a random token before creation' do
+    user = Fabricate(:user)
+    ruby = Category.create(name: 'ruby', user: user)
+    expect(Category.first.token).to be_present
+  end
+
   it "does not save a without a user" do
     ruby = Category.create(name: 'ruby')
     expect(Category.count).to eq(0)

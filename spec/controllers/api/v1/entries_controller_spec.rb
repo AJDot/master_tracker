@@ -13,15 +13,15 @@ describe API::V1::EntriesController do
       }
       get "/api/v1/users/#{user.id}/entries.json", params: {
         category: {
-          id: category.id,
+          id: category.token,
           value: category.name
         },
         skill: {
-          id: skill.id,
+          id: skill.token,
           value: skill.name
         },
         description: {
-          id: description.id,
+          id: description.token,
           value: description.name
         }
       }, headers: headers

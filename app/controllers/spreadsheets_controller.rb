@@ -2,17 +2,17 @@ class SpreadsheetsController < ApplicationController
   before_action :require_user, only: [:show, :new, :create, :edit, :update]
 
   def show
-    @spreadsheet = Spreadsheet.find params[:id]
-    @user = User.find params[:user_id]
+    @spreadsheet = Spreadsheet.find_by token: params[:id]
+    @user = User.find_by username: params[:user_id]
   end
 
   def new
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
     @spreadsheet = Spreadsheet.new
   end
 
   def create
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
     @spreadsheet = Spreadsheet.new(spreadsheet_params)
     @spreadsheet.user = @user
 
@@ -25,13 +25,13 @@ class SpreadsheetsController < ApplicationController
   end
 
   def edit
-    @user = User.find params[:user_id]
-    @spreadsheet = Spreadsheet.find params[:id]
+    @user = User.find_by username: params[:user_id]
+    @spreadsheet = Spreadsheet.find_by token: params[:id]
   end
 
   def update
-    @user = User.find params[:user_id]
-    @spreadsheet = Spreadsheet.find params[:id]
+    @user = User.find_by username: params[:user_id]
+    @spreadsheet = Spreadsheet.find_by token: params[:id]
 
     if @spreadsheet.update(spreadsheet_params)
       flash[:success] = 'Spreadsheet updated.'

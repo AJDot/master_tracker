@@ -2,7 +2,8 @@ class API::V1::CategoriesController < ApplicationController
   def index
     respond_to do |format|
       format.json do
-        categories = search(params[:query], {limit: params[:limit], user_id: params[:user_id]})
+        user = User.find_by username: params[:user_id]
+        categories = search(params[:query], { limit: params[:limit], user_id: user.id })
         render json: categories
       end
     end

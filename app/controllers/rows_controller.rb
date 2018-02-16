@@ -4,8 +4,8 @@ class RowsController < ApplicationController
   def create
     respond_to do |format|
       format.js do
-        @user = User.find params[:user_id]
-        @spreadsheet = Spreadsheet.find(params[:spreadsheet_id])
+        @user = User.find_by username: params[:user_id]
+        @spreadsheet = Spreadsheet.find_by token: params[:spreadsheet_id]
 
         if @spreadsheet.create_row
           render :add
@@ -20,12 +20,14 @@ class RowsController < ApplicationController
   def update
     respond_to do |format|
       format.js do
-        @spreadsheet = Spreadsheet.find(params[:id])
+        @spreadsheet = Spreadsheet.find_by token: params[:id]
         params[:data].each do |key, value|
           id = value["id"].to_i
-          params = value.permit("category_id", "skill_id", "description_id")
+          category = Category.find_by token: value["category_id"]
+          skill = Skill.find_by token: value["skill_id"]
+          description = Description.find_by token: value["description_id"]
           row = Row.find(id)
-          row.update(params)
+          row.update(category: category, skill: skill, description: description)
         end
         @spreadsheet.updated_at = DateTime.now.to_s
         @spreadsheet.save
@@ -35,8 +37,8 @@ class RowsController < ApplicationController
   end
 
   def destroy
-    @user = User.find params[:user_id]
-    @spreadsheet = Spreadsheet.find(params[:spreadsheet_id]);
+    @user = User.find_by username: params[:user_id]
+    @spreadsheet = Spreadsheet.find_by token: params[:spreadsheet_id]
     @spreadsheet.rows.last.destroy unless @spreadsheet.rows.empty?
     respond_to do |format|
       format.html do
