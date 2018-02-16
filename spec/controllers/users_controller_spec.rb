@@ -4,11 +4,23 @@ describe UsersController do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
-        get :show, params: { id: current_user.username }
       end
 
       it "sets @user" do
+        get :show, params: { id: current_user.username }
         expect(assigns(:user)).to eq(current_user)
+      end
+
+      it "redirects to current user show page if attempting to access a different user's page" do
+        alice = Fabricate(:user)
+        get :show, params: { id: alice.username }
+        expect(response).to redirect_to user_path(current_user)
+      end
+
+      it "sets the flash notice message if attempting to access a different user's page" do
+        alice = Fabricate(:user)
+        get :show, params: { id: alice.username }
+        expect(flash[:notice]).to be_present
       end
     end
 

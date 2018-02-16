@@ -3,6 +3,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by username: params[:id]
+    if @user != current_user
+      flash[:notice] = "Looking for your profile? We found it for you."
+      redirect_to user_path(current_user)
+    end
   end
 
   def new
