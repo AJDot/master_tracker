@@ -1,5 +1,8 @@
 class EntriesController < ApplicationController
   before_action :require_user, only: [:index, :new, :create, :edit, :update]
+  before_action  only: [:index, :new, :create, :edit, :update] do
+    require_user_owns_page(params[:user_id])
+  end
 
   def index
     @user = User.find_by username: params[:user_id]

@@ -6,14 +6,21 @@ describe SpreadsheetsController do
       let(:spreadsheet) { Fabricate(:spreadsheet, user: current_user)}
       before do
         session[:user_id] = current_user.id
-        get :show, params: { id: spreadsheet.token, user_id: current_user.username }
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          get :show, params: { id: spreadsheet.token, user_id: current_user.username + 'a' }
+        end
       end
 
       it "sets @spreadsheet" do
+        get :show, params: { id: spreadsheet.token, user_id: current_user.username }
         expect(assigns(:spreadsheet)).to eq(spreadsheet)
       end
 
       it "sets @user" do
+        get :show, params: { id: spreadsheet.token, user_id: current_user.username }
         expect(assigns(:user)).to eq(current_user)
       end
     end
@@ -33,15 +40,22 @@ describe SpreadsheetsController do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
-        get :new, params: { user_id: current_user.username }
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          get :new, params: { user_id: current_user.username + 'a' }
+        end
       end
 
       it "sets @spreadsheet to new spreadsheet" do
+        get :new, params: { user_id: current_user.username }
         expect(assigns(:spreadsheet)).to be_new_record
         expect(assigns(:spreadsheet)).to be_instance_of(Spreadsheet)
       end
 
       it "sets @user" do
+        get :new, params: { user_id: current_user.username }
         expect(assigns(:user)).to eq(current_user)
       end
     end
@@ -59,6 +73,12 @@ describe SpreadsheetsController do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          post :create, params: { spreadsheet: Fabricate.attributes_for(:spreadsheet), user_id: current_user.username + 'a' }
+        end
       end
 
       context "with valid inputs" do
@@ -125,14 +145,21 @@ describe SpreadsheetsController do
 
       before do
         session[:user_id] = current_user.id
-        get :edit, params: { id: spreadsheet.token, user_id: current_user.username }
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          get :edit, params: { id: spreadsheet.token, user_id: current_user.username + 'a' }
+        end
       end
 
       it "sets @user" do
+        get :edit, params: { id: spreadsheet.token, user_id: current_user.username }
         expect(assigns(:user)).to eq(current_user)
       end
 
       it "sets @spreadsheet" do
+        get :edit, params: { id: spreadsheet.token, user_id: current_user.username }
         expect(assigns(:spreadsheet)).to eq(spreadsheet)
       end
     end
@@ -161,6 +188,12 @@ describe SpreadsheetsController do
       let(:spreadsheet) { Fabricate(:spreadsheet, user: current_user, name: "old_name") }
       before do
         session[:user_id] = current_user.id
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          patch :update, params: { spreadsheet: { name: "new_name" }, user_id: current_user.username + 'a', id: spreadsheet.token }
+        end
       end
 
       context "with valid inputs" do

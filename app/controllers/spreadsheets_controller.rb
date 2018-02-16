@@ -1,9 +1,12 @@
 class SpreadsheetsController < ApplicationController
   before_action :require_user, only: [:show, :new, :create, :edit, :update]
+  before_action  only: [:show, :new, :create, :edit, :update] do
+    require_user_owns_page(params[:user_id])
+  end
 
   def show
-    @spreadsheet = Spreadsheet.find_by token: params[:id]
     @user = User.find_by username: params[:user_id]
+    @spreadsheet = Spreadsheet.find_by token: params[:id]
   end
 
   def new

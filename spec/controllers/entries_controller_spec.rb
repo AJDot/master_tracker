@@ -6,6 +6,12 @@ describe EntriesController do
         session[:user_id] = current_user.id
       end
 
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          get :index, params: { user_id: current_user.username + 'a' }
+        end
+      end
+
       it "sets @entries" do
         get :index, params: { user_id: current_user.username }
         expect(assigns(:entries)).to eq(current_user.entries)
@@ -30,15 +36,22 @@ describe EntriesController do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
-        get :new, params: { user_id: current_user.username }
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          get :new, params: { user_id: current_user.username + 'a' }
+        end
       end
 
       it "sets @entry to new entry" do
+        get :new, params: { user_id: current_user.username }
         expect(assigns(:entry)).to be_new_record
         expect(assigns(:entry)).to be_instance_of(Entry)
       end
 
       it "sets @user" do
+        get :new, params: { user_id: current_user.username }
         expect(assigns(:user)).to eq(current_user)
       end
     end
@@ -56,6 +69,12 @@ describe EntriesController do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          post :create, params: { entry: Fabricate.attributes_for(:entry), user_id: current_user.username + 'a' }
+        end
       end
 
       context "with valid inputs" do
@@ -122,14 +141,21 @@ describe EntriesController do
 
       before do
         session[:user_id] = current_user.id
-        get :edit, params: { id: entry.token, user_id: current_user.username }
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          get :edit, params: { id: entry.token, user_id: current_user.username + 'a' }
+        end
       end
 
       it "sets @user" do
+        get :edit, params: { id: entry.token, user_id: current_user.username }
         expect(assigns(:user)).to eq(current_user)
       end
 
       it "sets @entry" do
+        get :edit, params: { id: entry.token, user_id: current_user.username }
         expect(assigns(:entry)).to eq(entry)
       end
     end
@@ -158,6 +184,12 @@ describe EntriesController do
       let(:entry) { Fabricate(:entry, user: current_user, duration: 60) }
       before do
         session[:user_id] = current_user.id
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          patch :update, params: { entry: { duration: 120 }, user_id: current_user.username + 'a', id: entry.token }
+        end
       end
 
       context "with valid inputs" do
