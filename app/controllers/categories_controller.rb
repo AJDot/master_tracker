@@ -21,12 +21,12 @@ class CategoriesController < ApplicationController
 
   def edit
     @user = User.find params[:user_id]
-    @category = Category.find params[:id]
+    @category = Category.find_by token: params[:id]
   end
 
   def update
     @user = User.find params[:user_id]
-    @category = Category.find params[:id]
+    @category = Category.find_by token: params[:id]
 
     if @category.update(category_params)
       flash[:success] = "Category updated."

@@ -24,12 +24,12 @@ class EntriesController < ApplicationController
 
   def edit
     @user = User.find params[:user_id]
-    @entry = Entry.find params[:id]
+    @entry = Entry.find_by token: params[:id]
   end
 
   def update
     @user = User.find params[:user_id]
-    @entry = Entry.find params[:id]
+    @entry = Entry.find_by token: params[:id]
 
     if @entry.update(entry_params)
       flash[:success] = "Entry updated."

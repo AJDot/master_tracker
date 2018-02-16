@@ -19,6 +19,12 @@ describe Skill do
     expect(ruby.rows.count).to eq(2)
   end
 
+  it 'generates a random token before creation' do
+    user = Fabricate(:user)
+    ruby = Skill.create(name: 'ruby', user: user)
+    expect(Skill.first.token).to be_present
+  end
+
   it "does not save a without a user" do
     ruby = Skill.create(name: 'ruby')
     expect(Skill.count).to eq(0)

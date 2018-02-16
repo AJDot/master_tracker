@@ -91,7 +91,7 @@ describe SkillsController, type: :controller do
       let(:skill) { Fabricate(:skill, user: current_user) }
       before do
         session[:user_id] = current_user.id
-        get :edit, params: { id: skill.id, user_id: current_user.id}
+        get :edit, params: { id: skill.token, user_id: current_user.id}
       end
 
       it "sets @user" do
@@ -107,7 +107,7 @@ describe SkillsController, type: :controller do
       let(:user) { Fabricate(:user) }
       let(:skill) { Fabricate(:skill, user: user) }
       before do
-        get :edit, params: { id: skill.id, user_id: user.id }
+        get :edit, params: { id: skill.token, user_id: user.id }
       end
 
       it "redirects to the login path" do
@@ -130,7 +130,7 @@ describe SkillsController, type: :controller do
 
       context "with valid inputs" do
         before do
-          patch :update, params: { skill: { name: "new_name" }, user_id: current_user.id, id: skill.id }
+          patch :update, params: { skill: { name: "new_name" }, user_id: current_user.id, id: skill.token }
         end
 
         it "redirects to the user show page" do
@@ -149,7 +149,7 @@ describe SkillsController, type: :controller do
       context "with invalid inputs" do
         let(:skill) { Fabricate(:skill, name: "old_name", user: current_user) }
         before do
-          post :update, params: { skill: { name: "" }, user_id: current_user.id, id: skill.id }
+          post :update, params: { skill: { name: "" }, user_id: current_user.id, id: skill.token }
         end
 
         it "does not update a skill" do
@@ -170,7 +170,7 @@ describe SkillsController, type: :controller do
       before do
         user = Fabricate(:user)
         skill = Fabricate(:skill, name: "old_name", user: user)
-        post :update, params: { skill: { name: "new_name" }, user_id: user.id, id: skill.id }
+        post :update, params: { skill: { name: "new_name" }, user_id: user.id, id: skill.token }
       end
 
       it "does not update the skill" do

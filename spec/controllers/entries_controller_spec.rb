@@ -122,7 +122,7 @@ describe EntriesController do
 
       before do
         session[:user_id] = current_user.id
-        get :edit, params: { id: entry.id, user_id: current_user.id }
+        get :edit, params: { id: entry.token, user_id: current_user.id }
       end
 
       it "sets @user" do
@@ -139,7 +139,7 @@ describe EntriesController do
       let(:entry) { Fabricate(:entry, user: user) }
 
       before do
-        get :edit, params: { id: entry.id, user_id: user.id }
+        get :edit, params: { id: entry.token, user_id: user.id }
       end
 
       it "redirects to login path" do
@@ -162,7 +162,7 @@ describe EntriesController do
 
       context "with valid inputs" do
         before do
-          patch :update, params: { entry: { duration: 120 }, user_id: current_user.id, id: entry.id }
+          patch :update, params: { entry: { duration: 120 }, user_id: current_user.id, id: entry.token }
         end
 
         it "redirects to the user's entries index page" do
@@ -180,7 +180,7 @@ describe EntriesController do
 
       context "with invalid inputs" do
         before do
-          patch :update, params: { entry: { duration: 0 }, user_id: current_user.id, id: entry.id }
+          patch :update, params: { entry: { duration: 0 }, user_id: current_user.id, id: entry.token }
         end
 
         it "does not update an entry" do
@@ -201,7 +201,7 @@ describe EntriesController do
       let(:user) { Fabricate(:user) }
       let(:entry) { Fabricate(:entry, user: user, duration: 60) }
       before do
-        patch :update, params: { entry: { duration: 120 }, user_id: user.id, id: entry.id }
+        patch :update, params: { entry: { duration: 120 }, user_id: user.id, id: entry.token }
       end
 
       it "does not update the entry" do

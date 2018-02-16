@@ -21,12 +21,12 @@ class SkillsController < ApplicationController
 
   def edit
     @user = User.find params[:user_id]
-    @skill = Skill.find params[:id]
+    @skill = Skill.find_by token: params[:id]
   end
 
   def update
     @user = User.find params[:user_id]
-    @skill = Skill.find params[:id]
+    @skill = Skill.find_by token: params[:id]
 
     if @skill.update(skill_params)
       flash[:success] = "Skill updated."

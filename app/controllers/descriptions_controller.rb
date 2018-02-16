@@ -21,12 +21,12 @@ class DescriptionsController < ApplicationController
 
   def edit
     @user = User.find params[:user_id]
-    @description = Description.find params[:id]
+    @description = Description.find_by token: params[:id]
   end
 
   def update
     @user = User.find params[:user_id]
-    @description = Description.find params[:id]
+    @description = Description.find_by token: params[:id]
 
     if @description.update(description_params)
       flash[:success] = "Description updated."

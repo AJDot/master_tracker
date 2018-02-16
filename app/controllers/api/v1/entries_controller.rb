@@ -2,9 +2,9 @@ class API::V1::EntriesController < ApplicationController
   def index
     respond_to do |format|
       format.json do
-        category = Category.find(params[:category]["id"].to_i)
-        skill = Skill.find(params[:skill]["id"].to_i)
-        description = Description.find(params[:description]["id"].to_i)
+        category = Category.find_by token: params[:category]["id"]
+        skill = Skill.find_by token: params[:skill]["id"]
+        description = Description.find_by token: params[:description]["id"]
         user = User.find(params[:user_id])
         entries = entries_by_date_range(category, skill, description, user)
         render json: entries

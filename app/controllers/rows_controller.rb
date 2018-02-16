@@ -23,9 +23,11 @@ class RowsController < ApplicationController
         @spreadsheet = Spreadsheet.find_by token: params[:id]
         params[:data].each do |key, value|
           id = value["id"].to_i
-          params = value.permit("category_id", "skill_id", "description_id")
+          category = Category.find_by token: value["category_id"]
+          skill = Skill.find_by token: value["skill_id"]
+          description = Description.find_by token: value["description_id"]
           row = Row.find(id)
-          row.update(params)
+          row.update(category: category, skill: skill, description: description)
         end
         @spreadsheet.updated_at = DateTime.now.to_s
         @spreadsheet.save
