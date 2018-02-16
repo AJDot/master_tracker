@@ -10,7 +10,7 @@ describe RowsController do
           Fabricate(:skill, user: current_user)
           Fabricate(:description, user: current_user)
           session[:user_id] = current_user.id
-          post :create, format: 'js', params: { spreadsheet_id: spreadsheet.id, user_id: current_user.id }
+          post :create, format: 'js', params: { spreadsheet_id: spreadsheet.token, user_id: current_user.id }
         end
 
         it "creates an row" do
@@ -29,7 +29,7 @@ describe RowsController do
       context "without at least one category, skill, and description created for user" do
         before do
           session[:user_id] = current_user.id
-          post :create, format: 'js', params: { spreadsheet_id: spreadsheet.id, user_id: current_user.id }
+          post :create, format: 'js', params: { spreadsheet_id: spreadsheet.token, user_id: current_user.id }
         end
 
         it "sets the flash danger message" do
@@ -49,7 +49,7 @@ describe RowsController do
         Fabricate(:category, user: user)
         Fabricate(:skill, user: user)
         Fabricate(:description, user: user)
-        post :create, format: 'js', params: { spreadsheet_id: spreadsheet.id, user_id: user.id }
+        post :create, format: 'js', params: { spreadsheet_id: spreadsheet.token, user_id: user.id }
       end
 
       it "does not create a row" do
