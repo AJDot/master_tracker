@@ -4,7 +4,7 @@ describe CategoriesController, type: :controller do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
-        get :new, params: { user_id: current_user.id }
+        get :new, params: { user_id: current_user.username }
       end
 
       it "sets @category" do
@@ -34,7 +34,7 @@ describe CategoriesController, type: :controller do
 
       context "with valid inputs" do
         before do
-          post :create, params: { category: { name: "new_category" }, user_id: current_user.id }
+          post :create, params: { category: { name: "new_category" }, user_id: current_user.username }
         end
 
         it "redirects to the user show page" do
@@ -52,7 +52,7 @@ describe CategoriesController, type: :controller do
 
       context "with invalid inputs" do
         before do
-          post :create, params: { category: { name: "" }, user_id: current_user.id }
+          post :create, params: { category: { name: "" }, user_id: current_user.username }
         end
 
         it "does not create a category" do
@@ -91,7 +91,7 @@ describe CategoriesController, type: :controller do
       let(:category) { Fabricate(:category, user: current_user) }
       before do
         session[:user_id] = current_user.id
-        get :edit, params: { id: category.token, user_id: current_user.id}
+        get :edit, params: { id: category.token, user_id: current_user.username}
       end
 
       it "sets @user" do
@@ -130,7 +130,7 @@ describe CategoriesController, type: :controller do
 
       context "with valid inputs" do
         before do
-          patch :update, params: { category: { name: "new_name" }, user_id: current_user.id, id: category.token }
+          patch :update, params: { category: { name: "new_name" }, user_id: current_user.username, id: category.token }
         end
 
         it "redirects to the user show page" do
@@ -149,7 +149,7 @@ describe CategoriesController, type: :controller do
       context "with invalid inputs" do
         let(:category) { Fabricate(:category, name: "old_name", user: current_user) }
         before do
-          post :update, params: { category: { name: "" }, user_id: current_user.id, id: category.token }
+          post :update, params: { category: { name: "" }, user_id: current_user.username, id: category.token }
         end
 
         it "does not update a category" do

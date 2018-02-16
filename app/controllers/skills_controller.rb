@@ -3,12 +3,12 @@ class SkillsController < ApplicationController
 
   def new
     @skill = Skill.new
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
   end
 
   def create
     @skill = Skill.new(skill_params)
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
     @skill.user = @user
 
     if @skill.save
@@ -20,12 +20,12 @@ class SkillsController < ApplicationController
   end
 
   def edit
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
     @skill = Skill.find_by token: params[:id]
   end
 
   def update
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
     @skill = Skill.find_by token: params[:id]
 
     if @skill.update(skill_params)

@@ -2,7 +2,8 @@ class API::V1::SkillsController < ApplicationController
   def index
     respond_to do |format|
       format.json do
-        skills = search(params[:query], {limit: params[:limit], user_id: params[:user_id]})
+        user = User.find_by username: params[:user_id]
+        skills = search(params[:query], { limit: params[:limit], user_id: user.id })
         render json: skills
       end
     end

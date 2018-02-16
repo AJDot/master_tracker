@@ -21,7 +21,6 @@ Rails.application.routes.draw do
     resources :descriptions, only: [:new, :create, :edit, :update]
   end
 
-
   # namespace :api, :contraints => {:subdomain => "api"} do
   namespace :api, :defaults => {:format => :json} do
     namespace :v1 do

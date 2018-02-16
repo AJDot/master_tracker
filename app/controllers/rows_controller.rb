@@ -4,7 +4,7 @@ class RowsController < ApplicationController
   def create
     respond_to do |format|
       format.js do
-        @user = User.find params[:user_id]
+        @user = User.find_by username: params[:user_id]
         @spreadsheet = Spreadsheet.find_by token: params[:spreadsheet_id]
 
         if @spreadsheet.create_row
@@ -37,7 +37,7 @@ class RowsController < ApplicationController
   end
 
   def destroy
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
     @spreadsheet = Spreadsheet.find_by token: params[:spreadsheet_id]
     @spreadsheet.rows.last.destroy unless @spreadsheet.rows.empty?
     respond_to do |format|

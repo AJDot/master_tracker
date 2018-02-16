@@ -3,12 +3,12 @@ class DescriptionsController < ApplicationController
 
   def new
     @description = Description.new
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
   end
 
   def create
     @description = Description.new(description_params)
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
     @description.user = @user
 
     if @description.save
@@ -20,12 +20,12 @@ class DescriptionsController < ApplicationController
   end
 
   def edit
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
     @description = Description.find_by token: params[:id]
   end
 
   def update
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
     @description = Description.find_by token: params[:id]
 
     if @description.update(description_params)

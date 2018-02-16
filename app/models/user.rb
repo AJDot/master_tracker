@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
   def recent_entries(n = 5)
     entries.limit(n)
   end
+
+  def to_param
+    username
+  end
 end

@@ -4,7 +4,7 @@ describe UsersController do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
-        get :show, params: { id: current_user.id }
+        get :show, params: { id: current_user.username }
       end
 
       it "sets @user" do
@@ -76,7 +76,7 @@ describe UsersController do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
-        get :edit, params: { id: current_user.id }
+        get :edit, params: { id: current_user.username }
       end
 
       it "sets @user" do
@@ -101,7 +101,7 @@ describe UsersController do
 
       context "with valid inputs" do
         before do
-          patch :update, params: { user: { username: "new_name" }, id: current_user.id }
+          patch :update, params: { user: { username: "new_name" }, id: current_user.username }
         end
 
         it "updates the signed in user" do
@@ -113,13 +113,13 @@ describe UsersController do
         end
 
         it "redirects to the signed in user show page" do
-          expect(response).to redirect_to user_path(current_user)
+          expect(response).to redirect_to user_path(current_user.reload)
         end
       end
 
       context "with invalid inputs" do
         before do
-          patch :update, params: { user: { username: "" }, id: current_user.id }
+          patch :update, params: { user: { username: "" }, id: current_user.username }
         end
 
         it "does not update the user" do

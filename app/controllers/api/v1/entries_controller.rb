@@ -5,7 +5,7 @@ class API::V1::EntriesController < ApplicationController
         category = Category.find_by token: params[:category]["id"]
         skill = Skill.find_by token: params[:skill]["id"]
         description = Description.find_by token: params[:description]["id"]
-        user = User.find(params[:user_id])
+        user = User.find_by username: params[:user_id]
         entries = entries_by_date_range(category, skill, description, user)
         render json: entries
       end

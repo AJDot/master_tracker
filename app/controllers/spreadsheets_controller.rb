@@ -3,16 +3,16 @@ class SpreadsheetsController < ApplicationController
 
   def show
     @spreadsheet = Spreadsheet.find_by token: params[:id]
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
   end
 
   def new
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
     @spreadsheet = Spreadsheet.new
   end
 
   def create
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
     @spreadsheet = Spreadsheet.new(spreadsheet_params)
     @spreadsheet.user = @user
 
@@ -25,12 +25,12 @@ class SpreadsheetsController < ApplicationController
   end
 
   def edit
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
     @spreadsheet = Spreadsheet.find_by token: params[:id]
   end
 
   def update
-    @user = User.find params[:user_id]
+    @user = User.find_by username: params[:user_id]
     @spreadsheet = Spreadsheet.find_by token: params[:id]
 
     if @spreadsheet.update(spreadsheet_params)
