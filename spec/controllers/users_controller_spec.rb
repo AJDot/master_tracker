@@ -4,10 +4,16 @@ describe UsersController do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
-        get :show, params: { id: current_user.username }
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          get :show, params: { id: current_user.username + 'a' }
+        end
       end
 
       it "sets @user" do
+        get :show, params: { id: current_user.username }
         expect(assigns(:user)).to eq(current_user)
       end
     end
@@ -76,10 +82,16 @@ describe UsersController do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
-        get :edit, params: { id: current_user.username }
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          get :edit, params: { id: current_user.username + 'a' }
+        end
       end
 
       it "sets @user" do
+        get :edit, params: { id: current_user.username }
         expect(assigns(:user)).to eq(current_user)
       end
     end
@@ -97,6 +109,12 @@ describe UsersController do
       let(:current_user) { Fabricate(:user, username: "old_name") }
       before do
         session[:user_id] = current_user.id
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          patch :update, params: { user: { username: "new_name" }, id: current_user.username + 'a' }
+        end
       end
 
       context "with valid inputs" do

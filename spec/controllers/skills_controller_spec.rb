@@ -4,15 +4,22 @@ describe SkillsController, type: :controller do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
-        get :new, params: { user_id: current_user.username }
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          get :new, params: { user_id: current_user.username + 'a' }
+        end
       end
 
       it "sets @skill" do
+        get :new, params: { user_id: current_user.username }
         expect(assigns(:skill)).to be_new_record
         expect(assigns(:skill)).to be_instance_of(Skill)
       end
 
       it "sets @user" do
+        get :new, params: { user_id: current_user.username }
         expect(assigns(:user)).to eq(current_user)
       end
     end
@@ -30,6 +37,12 @@ describe SkillsController, type: :controller do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          post :create, params: { skill: { name: "new_skill" }, user_id: current_user.username + 'a' }
+        end
       end
 
       context "with valid inputs" do
@@ -91,14 +104,21 @@ describe SkillsController, type: :controller do
       let(:skill) { Fabricate(:skill, user: current_user) }
       before do
         session[:user_id] = current_user.id
-        get :edit, params: { id: skill.token, user_id: current_user.username}
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          get :edit, params: { id: skill.token, user_id: current_user.username + 'a' }
+        end
       end
 
       it "sets @user" do
+        get :edit, params: { id: skill.token, user_id: current_user.username}
         expect(assigns(:user)).to eq(current_user)
       end
 
       it "sets @skill" do
+        get :edit, params: { id: skill.token, user_id: current_user.username}
         expect(assigns(:skill)).to eq(skill)
       end
     end
@@ -126,6 +146,12 @@ describe SkillsController, type: :controller do
       let(:skill) { Fabricate(:skill, user: current_user, name: "old_name") }
       before do
         session[:user_id] = current_user.id
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          patch :update, params: { skill: { name: "new_name" }, user_id: current_user.username + 'a', id: skill.token }
+        end
       end
 
       context "with valid inputs" do

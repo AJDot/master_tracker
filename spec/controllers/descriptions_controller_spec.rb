@@ -4,15 +4,22 @@ describe DescriptionsController, type: :controller do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
-        get :new, params: { user_id: current_user.username }
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          get :new, params: { user_id: current_user.username + 'a' }
+        end
       end
 
       it "sets @description" do
+        get :new, params: { user_id: current_user.username }
         expect(assigns(:description)).to be_new_record
         expect(assigns(:description)).to be_instance_of(Description)
       end
 
       it "sets @user" do
+        get :new, params: { user_id: current_user.username }
         expect(assigns(:user)).to eq(current_user)
       end
     end
@@ -30,6 +37,12 @@ describe DescriptionsController, type: :controller do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          post :create, params: { description: { name: "new_description" }, user_id: current_user.username + 'a' }
+        end
       end
 
       context "with valid inputs" do
@@ -91,14 +104,21 @@ describe DescriptionsController, type: :controller do
       let(:description) { Fabricate(:description, user: current_user) }
       before do
         session[:user_id] = current_user.id
-        get :edit, params: { id: description.token, user_id: current_user.username}
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          get :edit, params: { id: description.token, user_id: current_user.username + 'a' }
+        end
       end
 
       it "sets @user" do
+        get :edit, params: { id: description.token, user_id: current_user.username}
         expect(assigns(:user)).to eq(current_user)
       end
 
       it "sets @description" do
+        get :edit, params: { id: description.token, user_id: current_user.username}
         expect(assigns(:description)).to eq(description)
       end
     end
@@ -126,6 +146,12 @@ describe DescriptionsController, type: :controller do
       let(:description) { Fabricate(:description, user: current_user, name: "old_name") }
       before do
         session[:user_id] = current_user.id
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          patch :update, params: { description: { name: "new_name" }, user_id: current_user.username + 'a', id: description.token }
+        end
       end
 
       context "with valid inputs" do

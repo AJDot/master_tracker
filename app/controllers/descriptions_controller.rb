@@ -1,5 +1,8 @@
 class DescriptionsController < ApplicationController
   before_action :require_user, only: [:new, :create, :edit, :update]
+  before_action only: [:new, :create, :edit, :update] do
+    require_user_owns_page(params[:user_id])
+  end
 
   def new
     @description = Description.new

@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   before_action :require_user, only: [:show, :edit, :update]
+  before_action only: [:show, :edit, :update] do
+    require_user_owns_page(params[:id])
+  end
 
   def show
     @user = User.find_by username: params[:id]

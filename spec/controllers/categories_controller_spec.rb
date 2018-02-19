@@ -4,15 +4,22 @@ describe CategoriesController, type: :controller do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
-        get :new, params: { user_id: current_user.username }
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          get :new, params: { user_id: current_user.username + 'a' }
+        end
       end
 
       it "sets @category" do
+        get :new, params: { user_id: current_user.username }
         expect(assigns(:category)).to be_new_record
         expect(assigns(:category)).to be_instance_of(Category)
       end
 
       it "sets @user" do
+        get :new, params: { user_id: current_user.username }
         expect(assigns(:user)).to eq(current_user)
       end
     end
@@ -30,6 +37,12 @@ describe CategoriesController, type: :controller do
       let(:current_user) { Fabricate(:user) }
       before do
         session[:user_id] = current_user.id
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          post :create, params: { category: { name: "new_category" }, user_id: current_user.username + 'a' }
+        end
       end
 
       context "with valid inputs" do
@@ -91,14 +104,21 @@ describe CategoriesController, type: :controller do
       let(:category) { Fabricate(:category, user: current_user) }
       before do
         session[:user_id] = current_user.id
-        get :edit, params: { id: category.token, user_id: current_user.username}
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          get :edit, params: { id: category.token, user_id: current_user.username + 'a' }
+        end
       end
 
       it "sets @user" do
+        get :edit, params: { id: category.token, user_id: current_user.username}
         expect(assigns(:user)).to eq(current_user)
       end
 
       it "sets @category" do
+        get :edit, params: { id: category.token, user_id: current_user.username}
         expect(assigns(:category)).to eq(category)
       end
     end
@@ -126,6 +146,12 @@ describe CategoriesController, type: :controller do
       let(:category) { Fabricate(:category, user: current_user, name: "old_name") }
       before do
         session[:user_id] = current_user.id
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          patch :update, params: { category: { name: "new_name" }, user_id: current_user.username + 'a', id: category.token }
+        end
       end
 
       context "with valid inputs" do

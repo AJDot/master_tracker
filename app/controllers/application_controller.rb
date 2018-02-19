@@ -19,6 +19,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_user_owns_page(user_id)
+    user = User.find_by username: user_id
+    if user != current_user
+      flash[:danger] = "That page doesn't exist. Here's your profile."
+      redirect_to user_path(current_user)
+    end
+  end
+
   def sum_duration(category, skill, description)
     entries = Entry.where(category: category, skill: skill, description: description)
     durations = entries.pluck(:duration).map(&:to_i)

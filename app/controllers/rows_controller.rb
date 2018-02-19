@@ -1,5 +1,8 @@
 class RowsController < ApplicationController
   before_action :require_user
+  before_action do
+    require_user_owns_page(params[:user_id])
+  end
 
   def create
     respond_to do |format|
