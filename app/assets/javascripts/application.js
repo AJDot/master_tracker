@@ -21,3 +21,4 @@
 //= require auto_lister.js
 //= require entry_trait_selector.js
 //= require save_spreadsheet.js
+//= require stopwatches.js

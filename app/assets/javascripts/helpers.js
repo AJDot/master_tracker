@@ -66,3 +66,7 @@ equalArrays = function(array1, array2) {
   }
   return true;
 }
+
+function padStartZeroes(number, count) {
+  return String(number).padStart(count, "0");
+}

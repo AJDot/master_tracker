@@ -689,6 +689,35 @@ span.right {
 
 /*
 *************************************************
+STOPWATCHES
+*************************************************
+*/
+
+.stopwatches table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.stopwatches thead th {
+  padding: 5px 10px;
+}
+
+.stopwatches tr {
+}
+
+.stopwatches tbody td {
+  padding: 15px 10px;
+  border-top: 1px solid #444444;
+  border-bottom: 1px solid #444444;
+}
+
+.stopwatches tfoot td {
+  padding: 15px 10px;
+  border-top: 3px double #444444;
+}
+/*
+*************************************************
 TEST
 *************************************************
 */
