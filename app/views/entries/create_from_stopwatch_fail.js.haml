@@ -1,0 +1,2 @@
+var $row = $('.table').find(".tr").has("input[value=#{@row_num}]");
+$row.replaceWith($("<div class='tr'><div class='td'>There was an error saving the entry. Sorry! Did your stopwatch have less than a minute on it?</div></div>"));

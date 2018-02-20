@@ -1,6 +1,8 @@
 App.Stopwatch = function($stopwatchElement) {
   this.$stopwatch = $stopwatchElement;
   this.$timeDisplay = this.$stopwatch.find('.time-display');
+
+  this.$timeDisplay.prop('readonly', true);
   this.$startStopBtn = this.$stopwatch.find('.startstop');
   this.$resetBtn = this.$stopwatch.find('.reset');
   this.originalDisplay = this.$timeDisplay.text();
@@ -28,7 +30,7 @@ App.Stopwatch.prototype = {
   step: function(timestamp) {
     if (!this.running) { return; }
     this.elapsed += this.timePassed(timestamp);
-    this.$timeDisplay.text(this.format(this.elapsed));
+    this.$timeDisplay.val(this.format(this.elapsed));
     requestAnimationFrame(this.step.bind(this));
   },
 
@@ -47,7 +49,7 @@ App.Stopwatch.prototype = {
     this.time = 0;
     this.running = false;
     this.resetStartStopBtn();
-    this.$timeDisplay.text(this.originalDisplay);
+    this.$timeDisplay.val(this.originalDisplay);
   },
 
   resetStartStopBtn: function() {

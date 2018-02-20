@@ -24,7 +24,7 @@ describe CategoriesController, type: :controller do
       end
     end
 
-    context "with unauthenticate users" do
+    context "with unauthenticated users" do
       it "redirects to login path" do
         get :new, params: { user_id: Fabricate(:user).id }
         expect(response).to redirect_to login_path
