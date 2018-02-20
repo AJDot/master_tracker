@@ -1,6 +1,5 @@
 App.Stopwatch = function($stopwatchElement) {
   this.$stopwatch = $stopwatchElement;
-  // this.build();
   this.$timeDisplay = this.$stopwatch.find('.time-display');
   this.$startStopBtn = this.$stopwatch.find('.startstop');
   this.$resetBtn = this.$stopwatch.find('.reset');
@@ -13,12 +12,6 @@ App.Stopwatch = function($stopwatchElement) {
 
 App.Stopwatch.prototype = {
   constructor: App.Stopwatch,
-
-  // build: function() {
-  //   this.$timeDisplay = $('<td>');
-  //   console.log(this.$stopwatch);
-  //   this.$stopwatch.append(this.$timeDisplay);
-  // },
 
   startStop: function() {
     if (this.running) {

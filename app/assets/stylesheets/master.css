@@ -693,29 +693,83 @@ STOPWATCHES
 *************************************************
 */
 
-.stopwatches table {
+.stopwatches .table {
   width: 100%;
   text-align: center;
   border-collapse: collapse;
 }
 
-.stopwatches thead th {
+.stopwatches .thead .th {
   padding: 5px 10px;
 }
 
-.stopwatches tr {
+.stopwatches .tr {
 }
 
-.stopwatches tbody td {
+.stopwatches .tbody .td {
   padding: 15px 10px;
   border-top: 1px solid #444444;
   border-bottom: 1px solid #444444;
 }
 
-.stopwatches tfoot td {
+.stopwatches .tfoot .td {
   padding: 15px 10px;
   border-top: 3px double #444444;
 }
+
+.stopwatches form input {
+  width: initial;
+  margin: 0;
+}
+
+/*
+*************************************************
+"TABLES"
+*************************************************
+*/
+
+.table {
+  display: table;
+  border-collapse: collapse;
+  border-spacing: 2px;
+  border-color: grey;
+}
+
+.table .thead {
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.table .tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.table .tfoot {
+  display: table-footer-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.table .tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+
+.table .td,
+.table .th {
+  display: table-cell;
+  vertical-align: inherit;
+}
+
+.table .th {
+  font-weight: bold;
+  text-align: -internal-center;
+}
+
 /*
 *************************************************
 TEST

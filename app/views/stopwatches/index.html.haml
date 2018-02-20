@@ -1,5 +1,23 @@
 = render 'shared/title', title: "Today's Activities"
 %section.stopwatches
+  .table
+    .thead
+      .tr
+        .th Elapsed Time
+        .th Category
+        .th Skill
+        .th Description
+        .th
+    .tbody
+      = form_tag user_new_stopwatch_entry_path(@user), class: 'tr stopwatch' do |f|
+        .td.time-display 00:00:00
+        .td Software Development
+        .td Ruby
+        .td Mastery Tracker
+        .td
+          .btn.btn-success.startstop Start
+          .btn.btn-danger.reset Reset
+          = submit_tag 'Submit', class: 'btn btn-success'
   %table
     %thead
       %tr
@@ -36,3 +54,4 @@
           .btn.btn-success.startstop Start
           .btn.btn-danger.reset Reset
           .btn.btn-success Submit
+    %tfoot
