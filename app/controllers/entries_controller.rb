@@ -44,11 +44,7 @@ class EntriesController < ApplicationController
 
   def create_from_stopwatch
     @row_num = params[:row_num]
-    mins = parse_stopwatch_duration(params[:duration])
-    category = Category.find_by token: params[:category_id]
-    skill = Skill.find_by token: params[:skill_id]
-    description = Description.find_by token: params[:description_id]
-    @entry = Entry.new(user: current_user, category: category, skill: skill, description: description, duration: mins, date: Date.today.to_s)
+    @entry = new_entry_from_stopwatch_params
     respond_to do |format|
       if @entry.save
         format.js do
@@ -66,5 +62,13 @@ class EntriesController < ApplicationController
 
   def entry_params
     params.require(:entry).permit(:duration, :date, :category_id, :skill_id, :description_id)
+  end
+
+  def new_entry_from_stopwatch_params
+    mins = parse_stopwatch_duration(params[:entry][:duration])
+    category = Category.find_by token: params[:entry][:category_id]
+    skill = Skill.find_by token: params[:entry][:skill_id]
+    description = Description.find_by token: params[:entry][:description_id]
+    Entry.new(user: current_user, category: category, skill: skill, description: description, duration: mins, date: Date.today.to_s)
   end
 end
