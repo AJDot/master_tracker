@@ -75,5 +75,5 @@ $(document).on("turbolinks:load", function() {
   var $stopwatches = $('.stopwatch');
   $stopwatches.each(function() {
     new App.Stopwatch($(this));
-  })
+  });
 });
