@@ -1,22 +1,21 @@
 feature 'user create entry from stopwatch', js: true do
   given(:alice) { Fabricate(:user) }
 
-  scenario 'with valid inputs' do
-    category = Fabricate(:category, user: alice)
-    skill = Fabricate(:skill, user: alice)
-    description = Fabricate(:description, user: alice)
-    sign_in(alice)
-    click_link 'New'
-    click_link 'Stopwatches'
-    page.find('.startstop', text: 'Start').click
-    select category.name, from: "Category"
-    select skill.name, from: "Skill"
-    select description.name, from: "Description"
-    sleep(30)
-    click_button "Submit"
-    expect(page).to have_content "successfully"
-
-  end
+  # scenario 'with valid inputs' do
+  #   category = Fabricate(:category, user: alice)
+  #   skill = Fabricate(:skill, user: alice)
+  #   description = Fabricate(:description, user: alice)
+  #   sign_in(alice)
+  #   click_link 'New'
+  #   click_link 'Stopwatches'
+  #   page.find('.startstop', text: 'Start').click
+  #   select category.name, from: "Category"
+  #   select skill.name, from: "Skill"
+  #   select description.name, from: "Description"
+  #   sleep(30)
+  #   click_button "Submit"
+  #   expect(page).to have_content "successfully"
+  # end
 
   scenario 'with invalid inputs' do
     category = Fabricate(:category, user: alice)
