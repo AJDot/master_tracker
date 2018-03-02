@@ -1,73 +1,22 @@
 .container.clearfix
-  = render 'shared/title', title: "Daily Activities"
+  = render 'shared/title', title: "Daily Activity"
   %section.daily_activities
-    .day
-      %h2 2/8/2018
-      .table
-        .thead
-          .tr
-            .th Duration
-            .th Category
-            .th Skill
-            .th Description
-            .th Submitted On
-        .tbody
-          .tr
-            .td 1:00:00
-            .td Category 1
-            .td Skill 1
-            .td Description 1
-            .td 2/8/2018
-          .tr
-            .td 1:00:00
-            .td Category 1
-            .td Skill 1
-            .td Description 1
-            .td 2/19/2018
-          .tr
-            .td 1:00:00
-            .td Category 1
-            .td Skill 1
-            .td Description 1
-            .td 2/19/2018
-          .tr
-            .td 1:00:00
-            .td Category 1
-            .td Skill 1
-            .td Description 1
-            .td 2/19/2018
-    .day
-      %h2 2/5/2018
-      .table
-        .thead
-          .tr
-            .th Duration
-            .th Category
-            .th Skill
-            .th Description
-            .th Submitted On
-        .tbody
-          .tr
-            .td 1:00:00
-            .td Category 1
-            .td Skill 1
-            .td Description 1
-            .td 2/8/2018
-          .tr
-            .td 1:00:00
-            .td Category 1
-            .td Skill 1
-            .td Description 1
-            .td 2/19/2018
-          .tr
-            .td 1:00:00
-            .td Category 1
-            .td Skill 1
-            .td Description 1
-            .td 2/19/2018
-          .tr
-            .td 1:00:00
-            .td Category 1
-            .td Skill 1
-            .td Description 1
-            .td 2/19/2018
+    - @user.entries.group_by(&:date).sort_by {|date, entries| date.time}.each do |date, entries|
+      .day
+        %h2= format_entry_date date
+        .table
+          .thead
+            .tr
+              .th Duration
+              .th Category
+              .th Skill
+              .th Description
+              .th Submitted On
+          .tbody
+            - entries.each do |entry|
+              .tr
+                .td= format_duration entry.duration
+                .td= entry.category.name
+                .td= entry.skill.name
+                .td= entry.description.name
+                .td= format_entry_date entry.updated_at

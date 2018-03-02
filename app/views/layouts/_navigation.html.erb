@@ -36,6 +36,12 @@
           Edit Profile
         <% end %>
       </li>
+      <li>
+        <%= link_to user_daily_activity_path(current_user) do %>
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          Daily Activity
+        <% end %>
+      </li>
       <li class="divider"></li>
       <li>
         <%= link_to logout_path do %>

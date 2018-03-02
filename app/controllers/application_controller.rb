@@ -33,15 +33,6 @@ class ApplicationController < ActionController::Base
     durations.reduce(:+)
   end
 
-  def format_duration(dur)
-    hh, mm = dur.to_i.divmod(60)
-    format("%2d:%02d", hh, mm)
-  end
-
-  def format_entry_date(date)
-    date.strftime('%b %e, %Y')
-  end
-
   def parse_stopwatch_duration(stopwatch_duration)
     match = stopwatch_duration.match /(\d+):(\d+):(\d+)/
     hours = match[1].to_i

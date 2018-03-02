@@ -161,4 +161,36 @@ describe UsersController do
       end
     end
   end
+
+  describe "GET daily_activity" do
+    context "with authenticated user" do
+      let(:current_user) { Fabricate(:user) }
+      before do
+        session[:user_id] = current_user.id
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          get :daily_activity, params: { user_id: current_user.username + 'a' }
+        end
+      end
+
+      it "renders the daily_activity template" do
+        get :daily_activity, params: { user_id: current_user.username }
+        expect(response).to render_template :daily_activity
+      end
+
+      it "sets @user" do
+        get :daily_activity, params: { user_id: current_user.username }
+        expect(assigns(:user)).to eq(current_user)
+      end
+    end
+
+    context "with unauthenticated user" do
+      it "redirects to login path" do
+        get :daily_activity, params: { user_id: Fabricate(:user).id }
+        expect(response).to redirect_to login_path
+      end
+    end
+  end
 end

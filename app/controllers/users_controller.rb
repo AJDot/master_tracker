@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-  before_action :require_user, only: [:show, :edit, :update]
-  before_action only: [:show, :edit, :update] do
-    require_user_owns_page(params[:id])
+  include ApplicationHelper
+  before_action :require_user, only: [:show, :edit, :update, :daily_activity]
+  before_action only: [:show, :edit, :update, :daily_activity] do
+    require_user_owns_page(params[:id] || params[:user_id])
   end
 
   def show
@@ -40,7 +41,7 @@ class UsersController < ApplicationController
   end
 
   def daily_activity
-    
+    @user = User.find_by username: params[:user_id]
   end
 
   private
