@@ -9,18 +9,21 @@
         .th Description
         .th
     .tbody
-      - 7.times do |n|
-        = form_tag user_new_stopwatch_entry_path(@user), class: 'tr stopwatch', remote: true do |f|
-          = hidden_field_tag :row_num, n
-          .td
-            = text_field_tag "entry[duration]", '01:00:00', class: 'time-display'
-          .td
-            = select_tag "entry[category_id]", options_for_select(@user.categories.collect { |c| [c.name, c.token] })
-          .td
-            = select_tag "entry[skill_id]", options_for_select(@user.skills.collect { |s| [s.name, s.token] })
-          .td
-            = select_tag "entry[description_id]", options_for_select(@user.descriptions.collect { |d| [d.name, d.token] })
-          .td
-            .btn.btn-success.startstop Start
-            .btn.btn-danger.reset Reset
-            = submit_tag 'Submit', class: 'btn btn-success'
+      = form_tag user_new_stopwatch_entry_path(@user), class: 'tr stopwatch', remote: true do |f|
+        = hidden_field_tag :row_num, 1
+        .td
+          = label_tag "entry[duration]", "Duration", class: "hidden"
+          = text_field_tag "entry[duration]", '00:00:00', class: 'time-display'
+        .td
+          = label_tag "entry[category_id]", "Category", class: "hidden"
+          = select_tag "entry[category_id]", options_for_select(@user.categories.collect { |c| [c.name, c.token] })
+        .td
+          = label_tag "entry[skill_id]", "Skill", class: "hidden"
+          = select_tag "entry[skill_id]", options_for_select(@user.skills.collect { |s| [s.name, s.token] })
+        .td
+          = label_tag "entry[description_id]", "Description", class: "hidden"
+          = select_tag "entry[description_id]", options_for_select(@user.descriptions.collect { |d| [d.name, d.token] })
+        .td
+          .btn.btn-success.startstop Start
+          .btn.btn-danger.reset Reset
+          = submit_tag 'Submit', class: 'btn btn-success'
