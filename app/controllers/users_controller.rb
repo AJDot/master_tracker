@@ -39,6 +39,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def daily_activity
+    
+  end
+
   private
 
   def user_params

@@ -782,6 +782,45 @@ STOPWATCHES
 
 /*
 *************************************************
+DAILY ACTIVITIES
+*************************************************
+*/
+
+.daily_activities .day {
+  margin-bottom: 30px;
+}
+
+.daily_activities .table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.daily_activities .thead .th {
+  padding: 5px 10px;
+}
+
+.daily_activities .tr {
+}
+
+.daily_activities .tbody .td {
+  padding: 15px 10px;
+  border-top: 1px solid #444444;
+  border-bottom: 1px solid #444444;
+}
+
+.daily_activities .tfoot .td {
+  padding: 15px 10px;
+  border-top: 3px double #444444;
+}
+
+.daily_activities form input {
+  width: initial;
+  margin: 0;
+}
+
+/*
+*************************************************
 TEST
 *************************************************
 */
