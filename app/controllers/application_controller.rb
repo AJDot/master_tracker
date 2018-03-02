@@ -41,4 +41,12 @@ class ApplicationController < ActionController::Base
   def format_entry_date(date)
     date.strftime('%b %e, %Y')
   end
+
+  def parse_stopwatch_duration(stopwatch_duration)
+    match = stopwatch_duration.match /(\d+):(\d+):(\d+)/
+    hours = match[1].to_i
+    mins = match[2].to_i
+    secs = match[3].to_i
+    (hours * 60 + mins + secs.to_f / 60).round
+  end
 end

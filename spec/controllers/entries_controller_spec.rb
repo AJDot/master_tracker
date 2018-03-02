@@ -134,6 +134,79 @@ describe EntriesController do
     end
   end
 
+  describe "POST create_from_stopwatch" do
+    context "with authenticated user" do
+      let(:current_user) { Fabricate(:user) }
+      before do
+        session[:user_id] = current_user.id
+      end
+
+      it_behaves_like "user must own the page" do
+        let(:action) do
+          category = Fabricate(:category, user: current_user)
+          skill = Fabricate(:skill, user: current_user)
+          description = Fabricate(:description, user: current_user)
+          post :create_from_stopwatch, params: { entry: { category_id: category.token, skill_id: skill.token, description_id: description.token, duration: "11:11:11" }, user_id: current_user.username + 'a' }, format: :js
+        end
+      end
+
+      context "with valid inputs" do
+        before do
+          category = Fabricate(:category, user: current_user)
+          skill = Fabricate(:skill, user: current_user)
+          description = Fabricate(:description, user: current_user)
+          post :create_from_stopwatch, params: { entry: { category_id: category.token, skill_id: skill.token, description_id: description.token, duration: "11:11:11" }, user_id: current_user.username }, format: :js
+        end
+
+        it "creates an entry" do
+          expect(Entry.count).to eq(1)
+        end
+
+        it "creates an entry associated with the signed in user" do
+          expect(current_user.entries.count).to eq(1)
+        end
+
+        it "renders the :create_from_stopwatch js template" do
+          expect(response).to render_template :create_from_stopwatch
+        end
+      end
+
+      context "with invalid inputs" do
+        before do
+          category = Fabricate(:category, user: current_user)
+          skill = Fabricate(:skill, user: current_user)
+          description = Fabricate(:description, user: current_user)
+          post :create_from_stopwatch, params: { entry: { category_id: category.token, skill_id: skill.token, description_id: description.token, duration: "00:00:00" }, user_id: current_user.username }, format: :js
+        end
+
+        it "does not create an entry" do
+          expect(Entry.count).to eq(0)
+        end
+
+        it "renders the :create_from_stopwatch_fail js template" do
+          expect(response).to render_template :create_from_stopwatch_fail
+        end
+      end
+    end
+
+    context "with unauthenticated user" do
+      before do
+        category = Fabricate(:category, user_id: 1)
+        skill = Fabricate(:skill, user_id: 1)
+        description = Fabricate(:description, user_id: 1)
+        post :create_from_stopwatch, params: { entry: { category_id: category.token, skill_id: skill.token, description_id: description.token, duration: "00:00:00" }, user_id: 1 }, format: :js
+      end
+
+      it "redirects to login path" do
+        expect(response).to redirect_to login_path
+      end
+
+      it "sets the flash danger message" do
+        expect(flash[:danger]).not_to be_blank
+      end
+    end
+  end
+
   describe "GET edit" do
     context "with authenticated user" do
       let(:current_user) { Fabricate(:user) }

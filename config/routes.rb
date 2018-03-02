@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     resources :categories, only: [:new, :create, :edit, :update]
     resources :skills, only: [:new, :create, :edit, :update]
     resources :descriptions, only: [:new, :create, :edit, :update]
+    resources :stopwatches, only: [:index]
+    post 'new_stopwatch_entry', to: 'entries#create_from_stopwatch'
   end
 
   # namespace :api, :contraints => {:subdomain => "api"} do

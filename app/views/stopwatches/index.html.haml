@@ -1,0 +1,26 @@
+= render 'shared/title', title: "Today's Activities"
+%section.stopwatches
+  .table
+    .thead
+      .tr
+        .th Elapsed Time
+        .th Category
+        .th Skill
+        .th Description
+        .th
+    .tbody
+      - 7.times do |n|
+        = form_tag user_new_stopwatch_entry_path(@user), class: 'tr stopwatch', remote: true do |f|
+          = hidden_field_tag :row_num, n
+          .td
+            = text_field_tag "entry[duration]", '01:00:00', class: 'time-display'
+          .td
+            = select_tag "entry[category_id]", options_for_select(@user.categories.collect { |c| [c.name, c.token] })
+          .td
+            = select_tag "entry[skill_id]", options_for_select(@user.skills.collect { |s| [s.name, s.token] })
+          .td
+            = select_tag "entry[description_id]", options_for_select(@user.descriptions.collect { |d| [d.name, d.token] })
+          .td
+            .btn.btn-success.startstop Start
+            .btn.btn-danger.reset Reset
+            = submit_tag 'Submit', class: 'btn btn-success'

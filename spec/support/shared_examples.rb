@@ -9,3 +9,15 @@ shared_examples "user must own the page" do
     expect(flash[:danger]).to be_present
   end
 end
+
+shared_examples "requires sign in" do
+  it "redirects to login path" do
+    action
+    expect(response).to redirect_to login_path
+  end
+
+  it "sets the flash danger message" do
+    action
+    expect(flash[:danger]).to be_present
+  end
+end
